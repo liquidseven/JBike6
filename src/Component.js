@@ -80,30 +80,30 @@ class Component extends React.Component {
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><FormLabel>Rear Wheel</FormLabel></td>
-                    <td><FormLabel>Front Wheel</FormLabel></td>
+                    <th><FormLabel>Rear Wheel</FormLabel></th>
+                    <th><FormLabel>Front Wheel</FormLabel></th>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><FormLabel>Diameter</FormLabel></td>
+                    <th><FormLabel>Diameter</FormLabel></th>
                     <td><TextField id="rearWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                     <td><TextField id="frontWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><FormLabel>Mass</FormLabel></td>
+                    <th><FormLabel>Mass</FormLabel></th>
                     <td><TextField id="rearWheelMass" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                     <td><TextField id="frontWheelMass" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                 </tr>
                 <tr>
-                    <td><FormLabel>Moment of Inertia</FormLabel></td>
-                    <td><FormLabel>lxx & lyy</FormLabel></td>
+                    <th><FormLabel>Moment of Inertia</FormLabel></th>
+                    <th><FormLabel>lxx & lyy</FormLabel></th>
                     <td><TextField id="rearLxxLyy" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                     <td><TextField id="frontLxxLyy" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><FormLabel>lzz</FormLabel></td>
+                    <th><FormLabel>lzz</FormLabel></th>
                     <td><TextField id="rearLzz" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                     <td><TextField id="frontLzz" defaultValue="0.0" margin="normal" variant="outlined"/></td>
                 </tr>

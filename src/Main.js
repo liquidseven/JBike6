@@ -15,6 +15,7 @@ class Main extends React.Component {
                 wheelBase : 0.0,
                 trail : 0.0
             }
+            
         this.getHeadAngle = this.getHeadAngle.bind(this);
         this.getAngleMeasurement = this.getAngleMeasurement.bind(this);
         this.getWheelBase = this.getWheelBase.bind(this);
