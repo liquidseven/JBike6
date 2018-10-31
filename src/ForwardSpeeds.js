@@ -41,7 +41,7 @@ class ForwardSpeeds extends React.Component {
         <br />
         <label>Steps</label>
         <input type="number" name="steps"></input>
-        <Button variant="contained" color="primary">Calculate</Button>
+        <Button variant="contained" color="primary" onClick={this.props.action}>Calculate</Button>
         <Button variant="outlined" color="primary">Save Bike</Button>
         <Button variant="outlined" color="primary">Clear Bike</Button> 
         </form>
