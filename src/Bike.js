@@ -1,10 +1,10 @@
 import React from 'react'
-import Menu from '@material-ui/core/Menu'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
+import './Component.css'
 
 const initialState = {
         bikename : "",
@@ -25,7 +25,8 @@ class Bike extends React.Component {
     }
 
     handleHeadAngle(e) {
-    this.props.action[0](e.target.value);
+        this.setState({headAngle : e.target.value})
+        this.props.action[0](e.target.value);
     }
 
     handleAngleMeasurement(e) {
@@ -34,61 +35,37 @@ class Bike extends React.Component {
     }
 
     handleWheelBase(e) {
-        
+        this.setState({wheelBase : e.target.value})
         this.props.action[2](e.target.value);
     }
 
     handleTrail(e) {
+        this.setState({trail : e.target.value})
         this.props.action[3](e.target.value);
     }
 
     render() {
         return (<div>
-        <form name="bikes">
-        <Menu />      
-            <TextField 
-                id="name"
-                label="Bike Name"/>
-            <TextField 
-            id="headAngle"
-            label="Head angle"
-            defaultValue = "0.0"
-            name={'headAngle'}
-            margin="normal"
-            onChange={this.handleHeadAngle}
-            />
-            <FormLabel>Angle Measurement</FormLabel>
-            <RadioGroup
+            <table className="center">
+            <tr>
+                <td><TextField id="name" label="Bike Name" name='name' margin='normal'/></td>
+                <td><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></td>
+            </tr>
+            <table>
+            <tr><td><FormLabel>Angle Measurement</FormLabel></td></tr>
+            <tr><td><RadioGroup
             value = {this.state.angleMeasurement}
             onChange={this.handleAngleMeasurement}>
                 <FormControlLabel value="0" control={<Radio />} label="Degrees" />
                 <FormControlLabel value="1" control={<Radio />} label="Radians" />
             </RadioGroup>
-            <TextField
-                id="wheelBase"
-                label="Wheel base"
-                defaultValue = "0.0"
-                name='wheelBase'
-                margin="normal"
-                onChange={this.handleWheelBase}
-            />
-            <TextField
-                id="trail"
-                label="Trail"
-                defaultvalue = "0.0"
-                margin = "normal"
-                onChange={this.handleTrail}
-            />
-            <TextField
-                id="bikeComment"
-                label="Bike Comment"
-                multiline
-                rows="6"
-                defaultValue=""
-                margin="normal"
-                variant="outlined"
+            </td></tr>
+            </table>
+            </table>
+            <TextField id="wheelBase" label="Wheel base" defaultValue = "0.0" name='wheelBase' margin="normal" variant='outlined' onChange={this.handleWheelBase}/>
+            <TextField id="trail" label="Trail" defaultvalue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/>
+            <TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"
         />
-        </form>
         </div>)
     }
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 import Bike from './Bike';
-// import ForwardSpeeds from './ForwardSpeeds';
+import Component from './Component'
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import './Main.css'
 
 class Main extends React.Component {
 
@@ -47,24 +49,22 @@ class Main extends React.Component {
         return (
         <div>
             <Bike action={this.bikeCallbacks}/>
-
-            <form name ="calculateSpeed" onSubmit={this.handleSubmit}>
             <h2>Forward Speeds</h2>
             <br />
-            <label>Min</label>
-            <input type="number" name="min"></input>
-            <label>m/s</label>      
-            <br />
-            <label>Max</label>
-            <input type="number" name="max"></input>
-            <label>m/s</label>       
-            <br />
-            <label>Steps</label>
-            <input type="number" name="steps"></input>
-            <Button variant="contained" color="primary" onClick={this.check}>Calculate</Button>
-            <Button variant="outlined" color="primary">Save Bike</Button>
-            <Button variant="outlined" color="primary">Clear Bike</Button> 
-            </form>
+            <table className="center">
+                <tr>
+                    <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
+                    <td><Button variant="contained" color="primary" onClick={this.check}>Calculate</Button></td>
+                </tr>
+                <tr>
+                    <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
+                    <td><Button variant="outlined" color="primary">Save Bike</Button></td>
+                </tr>
+                <tr>
+                <td><TextField id="steps" label="Steps" defaultValue="0" margin="normal" variant="outlined"/></td>
+                </tr>
+            </table>
+            <Component />
         </div>
         )
     }

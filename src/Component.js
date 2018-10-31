@@ -76,7 +76,7 @@ class Component extends React.Component {
         <div>
             <h2>Components</h2>
             
-            <table>
+            <table className="center">
                 <tr>
                     <td></td>
                     <td></td>
@@ -109,7 +109,7 @@ class Component extends React.Component {
                 </tr>
             </table>
 
-            <table>
+            <table className="center">
                 <tr>
                     <th></th>
                     <th><FormLabel>Rear Frame</FormLabel></th>
@@ -159,7 +159,8 @@ class Component extends React.Component {
                     <td><TextField id="rackAlpha" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
             </table>
-            <table>
+
+            <table className="center">
                 <tr>
                     <td><Button variant="contained" size="small" color="primary">XY</Button></td>
                     <th><FormLabel>Front Fork</FormLabel></th>
@@ -167,38 +168,38 @@ class Component extends React.Component {
                 </tr>
                 <tr>
                     <th><FormLabel>U</FormLabel></th>
-                    <td><TextField id="uFrontFork" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="uFrontBasket" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="uFrontFork" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="uFrontBasket" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>V</FormLabel></th>
-                    <td><TextField id="vFrontFork" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="vFrontBasket" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="vFrontFork" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="vFrontBasket" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>Mass</FormLabel></th>
-                    <td><TextField id="massFrontFork" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="massFrontBasket" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="massFrontFork" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="massFrontBasket" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>l11</FormLabel></th>
-                    <td><TextField id="frontForkl11" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="frontBasketl11" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontForkl11" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontBasketl11" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>l22</FormLabel></th>
-                    <td><TextField id="frontForkl22" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="frontBasketl22" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontForkl22" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontBasketl22" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>lzz</FormLabel></th>
-                    <td><TextField id="frontForklzz" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="frontBasketlzz" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontForklzz" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontBasketlzz" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
                 <tr>
                     <th><FormLabel>alpha</FormLabel></th>
-                    <td><TextField id="frontForkAlpha" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
-                    <td><TextField id="frontBasketAlpha" defaultvalue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontForkAlpha" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
+                    <td><TextField id="frontBasketAlpha" defaultValue="0.0" margin="normal" variant="outlined"></TextField></td>
                 </tr>
             </table>
         </div>
