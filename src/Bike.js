@@ -47,23 +47,27 @@ class Bike extends React.Component {
     render() {
         return (<div>
             <table className="center">
+            <tbody>
             <tr>
                 <td><TextField id="name" label="Bike Name" name='name' margin='normal'/></td>
                 <td><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></td>
             </tr>
+            </tbody>
+            </table>
             <table>
-            <tr><td><FormLabel>Angle Measurement</FormLabel></td></tr>
-            <tr><td><RadioGroup
+            <tbody>
+                <tr><td><FormLabel>Angle Measurement</FormLabel></td></tr>
+                <tr><td><RadioGroup
             value = {this.state.angleMeasurement}
             onChange={this.handleAngleMeasurement}>
                 <FormControlLabel value="0" control={<Radio />} label="Degrees" />
                 <FormControlLabel value="1" control={<Radio />} label="Radians" />
             </RadioGroup>
             </td></tr>
-            </table>
+            </tbody>
             </table>
             <TextField id="wheelBase" label="Wheel base" defaultValue = "0.0" name='wheelBase' margin="normal" variant='outlined' onChange={this.handleWheelBase}/>
-            <TextField id="trail" label="Trail" defaultvalue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/>
+            <TextField id="trail" label="Trail" defaultValue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/>
             <TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"
         />
         </div>)
