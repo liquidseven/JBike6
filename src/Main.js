@@ -10,6 +10,7 @@ class Main extends React.Component {
     constructor() {
         super(); 
             this.state = {
+                bikeName : "",
                 headAngle : 0.0,
                 angleMeasurement: 0,
                 wheelBase : 0.0,
@@ -79,11 +80,29 @@ class Main extends React.Component {
                     l22 : 0.0,
                     lzz : 0.0,
                     alpha : 0.0
-                }
+                },
+
+                xy_uv : 0
             }
 
         let gravity = 9.80665;
-            
+        let startTime;
+        let endTime;
+
+        let u = 0
+        let v = 0
+        let forkX = 0
+        let forkY = 0
+        let basketX = 0
+        let basketY = 0
+        let sha = Math.sin(Math.PI/2-this.state.headAngle)
+        let cha = Math.cos(Math.PI/2-this.state.headAngle)
+        let forkU = 0
+        let forkV = 0
+        let basketU = 0
+        let basketV = 0
+        
+        this.getBikeName = this.getBikeName.bind(this)
         this.getHeadAngle = this.getHeadAngle.bind(this);
         this.getAngleMeasurement = this.getAngleMeasurement.bind(this);
         this.getWheelBase = this.getWheelBase.bind(this);
@@ -141,7 +160,7 @@ class Main extends React.Component {
 
         this.check = this.check.bind(this);
 
-        this.bikeCallbacks = [this.getHeadAngle, this.getAngleMeasurement, this.getWheelBase, this.getTrail]
+        this.bikeCallbacks = [this.getHeadAngle, this.getAngleMeasurement, this.getWheelBase, this.getTrail, this.getBikeName]
         this.rearWheelCallbacks = [this.getRearWheelDiameter, this.getRearWheelMass, this.getRearWheelLxxLyy, this.getRearWheelLzz]
         this.frontWheelCallbacks = [this.getFrontWheelDiameter, this.getFrontWheelMass, this.getFrontWheelLxxLyy, this.getFrontWheelLzz]
         this.rearFrameCallbacks = [this.getRearFrameX, this.getRearFrameY, this.getRearFrameMass, this.getRearFrameL11, this.getRearFrameL22, this.getRearFrameLzz, this.getRearFrameAlpha]
@@ -149,9 +168,14 @@ class Main extends React.Component {
         this.rearRackCallbacks = [this.getRearRackX, this.getRearRackY, this.getRearRackMass, this.getRearRackL11, this.getRearRackL22, this.getRearRackLzz, this.getRearRackAlpha]
         this.frontForkCallbacks = [this.getFrontForkX, this.getFrontForkY, this.getFrontForkMass, this.getFrontForkL11, this.getFrontForkL22, this.getFrontForkLzz, this.getFrontForkAlpha]
         this.frontBasketCallbacks = [this.getFrontBasketX, this.getFrontBasketY, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
-
+        
+        this.setXyUv = this.setXyUv.bind(this)
         this.calculate = this.calculate.bind(this);
         }
+
+    getBikeName(data) {
+        this.setState({bikeName : data})
+    }
 
     getHeadAngle(data) {
         this.setState({headAngle : data});
@@ -427,14 +451,42 @@ class Main extends React.Component {
         this.setState({frontBasket : newFrontBasket})
     }
 
+
+
     check() {
-        alert(this.state.rearRack.x + '\n' + this.state.rearRack.y + '\n' + this.state.rearRack.mass + '\n' + this.state.rearRack.l11 + '\n' + this.state.rearRack.l22 + '\n' + this.state.rearRack.lzz + '\n' + this.state.rearRack.alpha);
+
+    }
+
+    setXyUv() {
+        let xyuv = this.state.xy_uv
+
+        if (xyuv === 0)
+            this.setState({xy_uv : 1})
+        else {
+            this.setState({xy_uv : 0})
+        }
+        console.log(this.state.xy_uv)
+    }
+
+    startTimeBegin() {
+        this.startTime = new Date()
+    }
+
+    endTimeEnd() {
+        this.endTime = new Date()
+        let diff = this.endTime - this.startTime;
+        console.log(`Done. Elapsed time = ${diff} seconds`)
     }
 
     calculate() {
+        this.startTimeBegin();
+
+        let bikeName = this.state.bikeName
+
         let wheelBase = parseFloat(this.state.wheelBase)
-        let handAngle = parseFloat(this.state.headAngle)
+        let headAngle = parseFloat(this.state.headAngle)
         let trail = parseFloat(this.state.trail)
+        let handleAngle = parseInt(this.state.headAngle)
         
         let rearWheelDiamter = parseFloat(this.state.rearWheel.diameter)
         let rearWheelMass = parseFloat(this.state.rearWheel.mass)
@@ -489,8 +541,21 @@ class Main extends React.Component {
         let frontBasketLzz = parseFloat(this.state.frontBasket.lzz)
         let frontBasketInertia = parseFloat(this.state.frontBasket.alpha)
 
+        if (headAngle === 0) {
+            rearWheelInertia *= Math.PI/180
+            frontWheelInertia *= Math.PI/180
+            rearFrameInertia *= Math.PI/180
+            riderInertia *= Math.PI/180
+            rearRackInertia *= Math.PI/180
+            frontForkInertia *= Math.PI/180
+            frontBasketInertia *= Math.PI/180
+        }
 
-        console.log(wheelBase);
+        if (this.state.xy_uv === 1) {
+
+        }
+
+        this.endTimeEnd();
     }
 
     checkForBlanks() {
@@ -518,7 +583,7 @@ class Main extends React.Component {
             </tbody>
             </table>
             <Component rearWheelAction={this.rearWheelCallbacks} frontWheelAction={this.frontWheelCallbacks} rearFrameAction={this.rearFrameCallbacks} riderAction={this.riderCallbacks} rearRackAction={this.rearRackCallbacks} frontForkAction={this.frontForkCallbacks}
-            frontBasketAction={this.frontBasketCallbacks}/>
+            frontBasketAction={this.frontBasketCallbacks} xyuvAction={this.setXyUv}/>
         </div>
         )
     }

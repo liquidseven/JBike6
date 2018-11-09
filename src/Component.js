@@ -7,6 +7,9 @@ class Component extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            xyuv : "XY",
+            X_U : "U",
+            Y_V : "V",
             rearWheel : {
                 diameter : 0.0,
                 mass : 0.0,
@@ -117,6 +120,8 @@ class Component extends React.Component {
         this.handleFrontBasketL22 = this.handleFrontBasketL22.bind(this)
         this.handleFrontBasketLzz = this.handleFrontBasketLzz.bind(this)
         this.handleFrontBasketAlpha = this.handleFrontBasketAlpha.bind(this)
+
+        this.handleXyUv = this.handleXyUv.bind(this)
     }
 
     handleRearWheelDiameter(e) {
@@ -308,6 +313,16 @@ class Component extends React.Component {
         this.props.frontBasketAction[6](e.target.value)
     }
 
+    handleXyUv(e) {
+        e.preventDefault();
+        if (this.state.xyuv === "XY") {
+            this.setState({xyuv : "UV", X_U: "X", Y_V : "Y"})
+        }
+        else
+            this.setState({xyuv : "XY", X_U : "U", Y_V : "V"})
+        this.props.xyuvAction();
+    }
+
     render() {
         return (
         <div>
@@ -404,17 +419,17 @@ class Component extends React.Component {
             <table className="center">
             <tbody>
                 <tr>
-                    <td><Button variant="contained" size="small" color="primary">XY</Button></td>
+                    <td><Button variant="contained" size="small" color="primary" onClick={this.handleXyUv}>{this.state.xyuv}</Button></td>
                     <th><FormLabel>Front Fork</FormLabel></th>
                     <th><FormLabel>Front Basket</FormLabel></th>
                 </tr>
                 <tr>
-                    <th><FormLabel>U</FormLabel></th>
+                    <th><FormLabel>{this.state.X_U}</FormLabel></th>
                     <td><TextField id="uFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkX}></TextField></td>
                     <td><TextField id="uFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkX}></TextField></td>
                 </tr>
                 <tr>
-                    <th><FormLabel>V</FormLabel></th>
+                    <th><FormLabel>{this.state.Y_V}</FormLabel></th>
                     <td><TextField id="vFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkY}></TextField></td>
                     <td><TextField id="vFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkY}></TextField></td>
                 </tr>

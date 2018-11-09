@@ -44,12 +44,16 @@ class Bike extends React.Component {
         this.props.action[3](e.target.value);
     }
 
+    handleBikeName(e) {
+        this.props.action[4](e.target.value)
+    }
+
     render() {
         return (<div>
             <table className="center">
             <tbody>
             <tr>
-                <td><TextField id="name" label="Bike Name" name='name' margin='normal'/></td>
+                <td><TextField id="name" label="Bike Name" name='name' margin='normal' onChange={this.handleBikeName}/></td>
                 <td><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></td>
             </tr>
             </tbody>
@@ -68,8 +72,7 @@ class Bike extends React.Component {
             </table>
             <TextField id="wheelBase" label="Wheel base" defaultValue = "0.0" name='wheelBase' margin="normal" variant='outlined' onChange={this.handleWheelBase}/>
             <TextField id="trail" label="Trail" defaultValue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/>
-            <TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"
-        />
+            <TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"/>
         </div>)
     }
 }
