@@ -19,14 +19,16 @@ class Main extends React.Component {
                     diameter : 0.0,
                     mass : 0.0,
                     lxxlyy : 0.0,
-                    lzz : 0.0
+                    lzz : 0.0,
+                    inertia : 0.0
                 },
 
                 frontWheel : {
                     diameter : 0.0,
                     mass : 0.0,
                     lxxlyy : 0.0,
-                    lzz : 0.0
+                    lzz : 0.0,
+                    inertia :0.0
                 },
 
                 rearFrame : {
@@ -79,6 +81,8 @@ class Main extends React.Component {
                     alpha : 0.0
                 }
             }
+
+        let gravity = 9.80665;
             
         this.getHeadAngle = this.getHeadAngle.bind(this);
         this.getAngleMeasurement = this.getAngleMeasurement.bind(this);
@@ -145,6 +149,8 @@ class Main extends React.Component {
         this.rearRackCallbacks = [this.getRearRackX, this.getRearRackY, this.getRearRackMass, this.getRearRackL11, this.getRearRackL22, this.getRearRackLzz, this.getRearRackAlpha]
         this.frontForkCallbacks = [this.getFrontForkX, this.getFrontForkY, this.getFrontForkMass, this.getFrontForkL11, this.getFrontForkL22, this.getFrontForkLzz, this.getFrontForkAlpha]
         this.frontBasketCallbacks = [this.getFrontBasketX, this.getFrontBasketY, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
+
+        this.calculate = this.calculate.bind(this);
         }
 
     getHeadAngle(data) {
@@ -425,6 +431,71 @@ class Main extends React.Component {
         alert(this.state.rearRack.x + '\n' + this.state.rearRack.y + '\n' + this.state.rearRack.mass + '\n' + this.state.rearRack.l11 + '\n' + this.state.rearRack.l22 + '\n' + this.state.rearRack.lzz + '\n' + this.state.rearRack.alpha);
     }
 
+    calculate() {
+        let wheelBase = parseFloat(this.state.wheelBase)
+        let handAngle = parseFloat(this.state.headAngle)
+        let trail = parseFloat(this.state.trail)
+        
+        let rearWheelDiamter = parseFloat(this.state.rearWheel.diameter)
+        let rearWheelMass = parseFloat(this.state.rearWheel.mass)
+        let rearWheelLxxLyy = parseFloat(this.state.rearWheel.lxxlyy)
+        let rearWheelLzz = parseFloat(this.state.rearWheel.lzz)
+        let rearWheelInertia = parseFloat(this.state.rearWheel.inertia)
+
+        let frontWheelDiamter = parseFloat(this.state.frontWheel.diameter)
+        let frontWheelMass = parseFloat(this.state.frontWheel.mass)
+        let frontWheelLxxLyy = parseFloat(this.state.frontWheel.lxxlyy)
+        let frontWheelLzz = parseFloat(this.state.frontWheel.lzz)
+        let frontWheelInertia = parseFloat(this.state.frontWheel.inertia)
+
+        let rearFrameX = parseFloat(this.state.rearFrame.x)
+        let rearFrameY = parseFloat(this.state.rearFrame.y)
+        let rearFrameMass = parseFloat(this.state.rearFrame.mass)
+        let rearFrameL11 = parseFloat(this.state.rearFrame.l11)
+        let rearFrameL22 = parseFloat(this.state.rearFrame.l22)
+        let rearFrameLzz = parseFloat(this.state.rearFrame.lzz)
+        let rearFrameInertia = parseFloat(this.state.rearFrame.alpha)
+
+        let riderX = parseFloat(this.state.rider.x)
+        let riderY = parseFloat(this.state.rider.y)
+        let riderMass = parseFloat(this.state.rider.mass)
+        let riderL11 = parseFloat(this.state.rider.l11)
+        let riderL22 = parseFloat(this.state.rider.l22)
+        let riderLzz = parseFloat(this.state.rider.lzz)
+        let riderInertia = parseFloat(this.state.rider.alpha)
+
+
+        let rearRackX = parseFloat(this.state.rearRack.x)
+        let rearRackY = parseFloat(this.state.rearRack.y)
+        let rearRackMass = parseFloat(this.state.rearRack.mass)
+        let rearRackL11 = parseFloat(this.state.rearRack.l11)
+        let rearRackL22 = parseFloat(this.state.rearRack.l22)
+        let rearRackLzz = parseFloat(this.state.rearRack.lzz)
+        let rearRackInertia = parseFloat(this.state.rearRack.alpha)
+
+        let frontForkX = parseFloat(this.state.frontFork.x)
+        let frontForkY = parseFloat(this.state.frontFork.y)
+        let frontForkMass = parseFloat(this.state.frontFork.mass)
+        let frontForkL11 = parseFloat(this.state.frontFork.l11)
+        let frontForkL22 = parseFloat(this.state.frontFork.l22)
+        let frontForkLzz = parseFloat(this.state.frontFork.lzz)
+        let frontForkInertia = parseFloat(this.state.frontFork.alpha)
+
+        let frontBasketX = parseFloat(this.state.frontBasket.x)
+        let frontBasketY = parseFloat(this.state.frontBasket.y)
+        let frontBasketMass = parseFloat(this.state.frontBasket.mass)
+        let frontBasketL11 = parseFloat(this.state.frontBasket.l11)
+        let frontBasketL22 = parseFloat(this.state.frontBasket.l22)
+        let frontBasketLzz = parseFloat(this.state.frontBasket.lzz)
+        let frontBasketInertia = parseFloat(this.state.frontBasket.alpha)
+
+
+        console.log(wheelBase);
+    }
+
+    checkForBlanks() {
+    }
+
     render() {
         return (
         <div>
@@ -435,7 +506,7 @@ class Main extends React.Component {
             <tbody>
                 <tr>
                     <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
-                    <td><Button variant="contained" color="primary" onClick={this.check}>Calculate</Button></td>
+                    <td><Button variant="contained" color="primary" onClick={this.calculate}>Calculate</Button></td>
                 </tr>
                 <tr>
                     <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
