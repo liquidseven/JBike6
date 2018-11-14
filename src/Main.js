@@ -3,6 +3,7 @@ import Bike from './Bike';
 import Component from './Component'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Matrix from './Matrix.js'
 import './Main.css'
 
 class Main extends React.Component {
@@ -119,6 +120,7 @@ class Main extends React.Component {
 
         this.getMinVel = this.getMinVel.bind(this)
         this.getMaxVel = this.getMaxVel.bind(this)
+        this.getSteps = this.getSteps.bind(this)
 
         this.getRearWheelDiameter = this.getRearWheelDiameter.bind(this);
         this.getRearWheelMass = this.getRearWheelMass.bind(this);
@@ -205,12 +207,22 @@ class Main extends React.Component {
         this.setState({trail : data});
     }
 
-    getMinVel(data) {
-        this.setState({velocity : data})
+    getMinVel(e) {
+        let newVel = this.state.velocity;
+        newVel.minVel = e.target.value
+        this.setState({velocity : newVel})
     }
 
-    getMaxVel(data) {
-        this.setState({velocity : {maxVel : data}})
+    getMaxVel(e) {
+        let newVel = this.state.velocity;
+        newVel.maxVel = e.target.value
+        this.setState({velocity : newVel})
+    }
+
+    getSteps(e) {
+        let newVel = this.state.velocity
+        newVel.steps = e.target.value
+        this.setState({velocity : newVel})
     }
 
     getRearWheelDiameter(data) {
@@ -474,7 +486,7 @@ class Main extends React.Component {
 
 
     check() {
-        
+        alert(this.state.velocity.minVel + '\n' + this.state.velocity.maxVel + '\n' + this.state.velocity.steps)
     }
 
     setXyUv() {
@@ -592,10 +604,16 @@ class Main extends React.Component {
 
         let lambda = Math.pi/2-headAngle
 
-        console.log(`min vel: ${minVel} \n max vel: ${maxVel}`)
+        let massMatrix = new Matrix(frontWheelMass, frontForkMass, frontBasketMass, rearWheelMass, rearFrameMass, rearRackMass, riderMass)
+
+        let zeroM = new Matrix([0,0], [0,0])
+
+        let R1 = new Matrix([Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)])
 
         this.endTimeEnd();
     }
+
+
 
     checkForBlanks() {
     }
@@ -617,7 +635,7 @@ class Main extends React.Component {
                     <td><Button variant="outlined" color="primary">Save Bike</Button></td>
                 </tr>
                 <tr>
-                <td><TextField id="steps" label="Steps" defaultValue="0" margin="normal" variant="outlined"/></td>
+                <td><TextField id="steps" label="Steps" defaultValue="0" margin="normal" variant="outlined" onChange={this.getSteps}/></td>
                 </tr>
             </tbody>
             </table>

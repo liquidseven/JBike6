@@ -1,4 +1,3 @@
-import Vector from './Vector';
 
 class Matrix {
 
@@ -26,18 +25,14 @@ class Matrix {
 
 
     multiply(v) {       // Ax
-        if (this.data.length == 0) {
+        if (this.data.length === 0) {
             throw new Error("Empty Matrix")
         }
-        if (v.data.length != this.data.length) {
+        if (v.data.length !== this.data.length) {
             throw new Error("Invalid Vector dimensions")
         }
         this.data.map((vec, index) => vec.scalerProduct(v.data[index]));
         return this;
-    }
-
-    swap(v1,v2) { //indices
-        let temp = v1;
     }
 }
 
