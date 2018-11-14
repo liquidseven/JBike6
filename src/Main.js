@@ -10,11 +10,20 @@ class Main extends React.Component {
     constructor() {
         super(); 
             this.state = {
-                bikeName : "",
-                headAngle : 0.0,
-                angleMeasurement: 0,
-                wheelBase : 0.0,
-                trail : 0.0,
+
+                bike : {
+                    bikeName : "",
+                    headAngle : 0.0,
+                    angleMeasurement: 0,
+                    wheelBase : 0.0,
+                    trail : 0.0
+                },
+                
+                velocity : {
+                    minVel : 0,
+                    maxVel : 0,
+                    steps : 0
+                },
 
                 rearWheel : {
                     diameter : 0.0,
@@ -108,6 +117,9 @@ class Main extends React.Component {
         this.getWheelBase = this.getWheelBase.bind(this);
         this.getTrail = this.getTrail.bind(this);
 
+        this.getMinVel = this.getMinVel.bind(this)
+        this.getMaxVel = this.getMaxVel.bind(this)
+
         this.getRearWheelDiameter = this.getRearWheelDiameter.bind(this);
         this.getRearWheelMass = this.getRearWheelMass.bind(this);
         this.getRearWheelLxxLyy = this.getRearWheelLxxLyy.bind(this);
@@ -191,6 +203,14 @@ class Main extends React.Component {
 
     getTrail(data) {
         this.setState({trail : data});
+    }
+
+    getMinVel(data) {
+        this.setState({velocity : data})
+    }
+
+    getMaxVel(data) {
+        this.setState({velocity : {maxVel : data}})
     }
 
     getRearWheelDiameter(data) {
@@ -454,7 +474,7 @@ class Main extends React.Component {
 
 
     check() {
-
+        
     }
 
     setXyUv() {
@@ -481,12 +501,15 @@ class Main extends React.Component {
     calculate() {
         this.startTimeBegin();
 
+        
         let bikeName = this.state.bikeName
-
         let wheelBase = parseFloat(this.state.wheelBase)
         let headAngle = parseFloat(this.state.headAngle)
         let trail = parseFloat(this.state.trail)
         let handleAngle = parseInt(this.state.headAngle)
+
+        let minVel = parseFloat(this.state.velocity.minVel)
+        let maxVel = parseFloat(this.state.velocity.maxVel)
         
         let rearWheelDiamter = parseFloat(this.state.rearWheel.diameter)
         let rearWheelMass = parseFloat(this.state.rearWheel.mass)
@@ -552,8 +575,24 @@ class Main extends React.Component {
         }
 
         if (this.state.xy_uv === 1) {
+            this.u = wheelBase + trail
+            this.v = 0;
 
+            this.forkX = this.forkU
+            this.forkY = this.forkV
+            
+            this.basketX = this.basketU
+            this.basketY = this.basketV
+
+            this.forkU = (this.ForkX - this.u) * this.cha + (this.forkY - this.v) * this.sha
+            this.forkV = (this.forkX - this.u) * this.sha + (this.forkY - this.u) * this.cha
+            this.basketU = (this.basketX - this.u) * this.cha + (this.basketY - this.v) * this.sha
+            this.basketV = -(this.basketX - this.u) * this.sha + (this.basketY - this.v) * this.cha
         }
+
+        let lambda = Math.pi/2-headAngle
+
+        console.log(`min vel: ${minVel} \n max vel: ${maxVel}`)
 
         this.endTimeEnd();
     }
@@ -570,11 +609,11 @@ class Main extends React.Component {
             <table className="center">
             <tbody>
                 <tr>
-                    <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
+                    <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMinVel}/></td>
                     <td><Button variant="contained" color="primary" onClick={this.calculate}>Calculate</Button></td>
                 </tr>
                 <tr>
-                    <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined"/></td>
+                    <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMaxVel}/></td>
                     <td><Button variant="outlined" color="primary">Save Bike</Button></td>
                 </tr>
                 <tr>
