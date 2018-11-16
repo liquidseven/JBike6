@@ -606,6 +606,10 @@ class Main extends React.Component {
 
         let massMatrix = new Matrix(frontWheelMass, frontForkMass, frontBasketMass, rearWheelMass, rearFrameMass, rearRackMass, riderMass)
 
+        console.log(massMatrix.data);
+
+        console.log(massMatrix.add(new Matrix(1,1,1,1,1,1,1)).data)
+
         let zeroM = new Matrix([0,0], [0,0])
 
         let R1 = new Matrix([Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)])
