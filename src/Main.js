@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Matrix from './Matrix.js'
 import './Main.css'
 
+const math = require('mathjs')
+
 class Main extends React.Component {
 
     constructor() {
@@ -184,7 +186,8 @@ class Main extends React.Component {
         this.frontBasketCallbacks = [this.getFrontBasketX, this.getFrontBasketY, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
         
         this.setXyUv = this.setXyUv.bind(this)
-        this.calculate = this.calculate.bind(this);
+        this.calculate = this.calculate.bind(this)
+        this.addMassInertia = this.addMassInertia.bind(this)
         }
 
     getBikeName(data) {
@@ -514,11 +517,11 @@ class Main extends React.Component {
         this.startTimeBegin();
 
         
-        let bikeName = this.state.bikeName
-        let wheelBase = parseFloat(this.state.wheelBase)
-        let headAngle = parseFloat(this.state.headAngle)
-        let trail = parseFloat(this.state.trail)
-        let handleAngle = parseInt(this.state.headAngle)
+        let bikeName = this.state.bike.bikeName
+        let wheelBase = parseFloat(this.state.bike.wheelBase)
+        let headAngle = parseFloat(this.state.bike.headAngle)
+        let trail = parseFloat(this.state.bike.trail)
+        let angleMeasurement = parseInt(this.state.bike.angleMeasurement)
 
         let minVel = parseFloat(this.state.velocity.minVel)
         let maxVel = parseFloat(this.state.velocity.maxVel)
@@ -576,6 +579,14 @@ class Main extends React.Component {
         let frontBasketLzz = parseFloat(this.state.frontBasket.lzz)
         let frontBasketInertia = parseFloat(this.state.frontBasket.alpha)
 
+        let iFrontWheel  = math.matrix([[frontWheelLxxLyy], [frontWheelLxxLyy], [frontWheelLzz]])
+        let iFork = math.matrix([[frontForkL11], [frontForkL22], [frontForkLzz]])
+        let iBasket = math.matrix([[frontBasketL11], [frontBasketL22], [frontBasketLzz]])
+        let iRearWheel = math.matrix([[rearWheelLxxLyy], [rearWheelLxxLyy], [rearWheelLzz]])
+        let iFrame = math.matrix([[rearFrameL11], [rearFrameL22], [rearFrameLzz]])
+        let iRack = math.matrix([[rearRackL11], [rearRackL22], [rearRackLzz]])
+        let iRider = math.matrix([[riderL11], [riderL22], [riderLzz]])
+
         if (headAngle === 0) {
             rearWheelInertia *= Math.PI/180
             frontWheelInertia *= Math.PI/180
@@ -602,21 +613,44 @@ class Main extends React.Component {
             this.basketV = -(this.basketX - this.u) * this.sha + (this.basketY - this.v) * this.cha
         }
 
-        let lambda = Math.pi/2-headAngle
+        let lambda = Math.PI / 2 - headAngle
 
-        let massMatrix = new Matrix(frontWheelMass, frontForkMass, frontBasketMass, rearWheelMass, rearFrameMass, rearRackMass, riderMass)
+        let massMatrix = math.matrix([frontWheelMass, frontForkMass, frontBasketMass, rearWheelMass, rearFrameMass, rearRackMass, riderMass])
 
-        console.log(massMatrix.data);
+        let R1 = math.matrix([[Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)]])
+        //let O1 = math.matrix([[wheelBase + trail], [0]])
+        let O1 = math.matrix([[2], [4]])
+        let x = O1.get([0,0])
+        let y = O1.get([1,0])
+        let p0 = math.eval('R1[1:1,:] + x', {R1, x})
+        let p1 = math.eval('R1[2:2,:] + y', {R1, y})
+        //let uvFork = math.matrix([[frontForkX], [frontForkY]])
+        //let uvBasket = math.matrix([[frontBasketX], [frontBasketY]])
+        let uvFork = math.matrix([[2], [3]])
+        let uvBasket = math.matrix([[3], [5]])
 
-        console.log(massMatrix.add(new Matrix(1,1,1,1,1,1,1)).data)
+        let p = math.matrix([[p0.get([0,0]), p0.get([0,1])], [p1.get([0,0]), p1.get([0,1])]])
 
-        let zeroM = new Matrix([0,0], [0,0])
+        let pFork = math.multiply(p,uvFork)
+        let xcmFork = pFork.get([0,0])
+        let ycmFork = pFork.get([1,0])
 
-        let R1 = new Matrix([Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)])
+        let pBasket = math.multiply(p,uvBasket)
+        let xcmBasket = pBasket.get([0,0])
+        let ycmBasket = pBasket.get([1,0])
 
-        this.endTimeEnd();
+        let centerMassMatrix = math.matrix([[wheelBase, frontWheelDiamter / 2], [xcmFork, ycmFork], [xcmBasket, ycmBasket], [0, rearWheelDiamter/2], [rearFrameX, rearFrameY], [rearRackX, rearRackY], [riderX, riderY]])
+        let inertiaMatrix = math.matrix([[iFrontWheel], [iFork], [iBasket], [iRearWheel], [iFrame], [iRack], [iRider]]);
+        let alphaCenterMass = math.matrix([[frontWheelInertia], [frontForkInertia], [frontBasketInertia], [rearWheelInertia], [rearFrameInertia], [rearRackInertia], [riderInertia]])
+        
     }
 
+    addMassInertia(m, cm, I, a) {
+        let n = m.length;
+        let mt = math.sum(m)
+        let cmt
+
+    }
 
 
     checkForBlanks() {

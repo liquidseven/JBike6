@@ -52,6 +52,9 @@ class Matrix {
             this.data.map((x) => x + y)
             newM.data = this.data
             return newM
+        } 
+        if (m.getN === 1) {
+
         }
         else {
         let d = []
@@ -64,7 +67,7 @@ class Matrix {
         })
         newM.data = d
         return newM
-    }
+        }
     }
 }
 
