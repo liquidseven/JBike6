@@ -186,8 +186,11 @@ class Main extends React.Component {
         this.frontBasketCallbacks = [this.getFrontBasketX, this.getFrontBasketY, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
         
         this.setXyUv = this.setXyUv.bind(this)
+        this.subtractByColumn = this.subtractByColumn.bind(this)
         this.calculate = this.calculate.bind(this)
         this.addMassInertia = this.addMassInertia.bind(this)
+        this.test = this.test.bind(this)
+        this.test();
         }
 
     getBikeName(data) {
@@ -615,7 +618,7 @@ class Main extends React.Component {
 
         let lambda = Math.PI / 2 - headAngle
 
-        let massMatrix = math.matrix([frontWheelMass, frontForkMass, frontBasketMass, rearWheelMass, rearFrameMass, rearRackMass, riderMass])
+        
 
         let R1 = math.matrix([[Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)]])
         //let O1 = math.matrix([[wheelBase + trail], [0]])
@@ -639,19 +642,85 @@ class Main extends React.Component {
         let xcmBasket = pBasket.get([0,0])
         let ycmBasket = pBasket.get([1,0])
 
+        let massMatrix = math.matrix([[frontWheelMass], [frontForkMass], [frontBasketMass], [rearWheelMass], [rearFrameMass], [rearRackMass], [riderMass]])
         let centerMassMatrix = math.matrix([[wheelBase, frontWheelDiamter / 2], [xcmFork, ycmFork], [xcmBasket, ycmBasket], [0, rearWheelDiamter/2], [rearFrameX, rearFrameY], [rearRackX, rearRackY], [riderX, riderY]])
         let inertiaMatrix = math.matrix([[iFrontWheel], [iFork], [iBasket], [iRearWheel], [iFrame], [iRack], [iRider]]);
         let alphaCenterMass = math.matrix([[frontWheelInertia], [frontForkInertia], [frontBasketInertia], [rearWheelInertia], [rearFrameInertia], [rearRackInertia], [riderInertia]])
+
+        console.log(iFrontWheel)
+        //let massInertiaBody = this.addMassInertia(massMatrix, centerMassMatrix, inertiaMatrix, alphaCenterMass)
+
+        //console.log(massInertiaBody)
         
     }
 
+
     addMassInertia(m, cm, I, a) {
-        let n = m.length;
+        // let m = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
+        // let cm = math.matrix([[1,2], [3,4], [5,6], [7,8], [9,10], [11,12], [13,14]])
+        // let I = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
+        // let a = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
+
+        let n = math.size(m).get([0])
         let mt = math.sum(m)
         let cmt
 
+        if (mt === 0)
+            cmt = math.dotMultiply(math.multiply(math.transpose(m), cm), 0)
+        else
+            cmt = math.dotDivide(math.multiply(math.transpose(m), cm), mt)
+
+        let It = math.zeros(3,3)
+        let q
+        let R
+        let Iuvz
+        let d1
+        let d2
+        let dColumn
+        let Ixyz
+        let identity = math.identity(3)
+        let ixyz1
+        let ixyz2
+
+       for (let i = 0; i < n; i++) {
+            q = a.get([i,0])
+            R = math.matrix([[Math.cos(q), -Math.sin(q), 0], [Math.sin(q), Math.cos(q), 0], [0, 0, 1]])
+            Iuvz = I.get([i,0])
+            d1 = math.matrix([[cm.get([i,0])], [cm.get([i,1])], [0]])
+            d2 = math.matrix([[cmt.get([0,0])], [cmt.get([0,1])], [0]])
+            dColumn = math.subtract(d1,d2)
+
+            ixyz1 = math.multiply(R, Iuvz)
+            ixyz1 = math.multiply(ixyz1, math.transpose(R))           
+            
+            ixyz2 = math.multiply(math.transpose(dColumn), dColumn)
+            ixyz2 = math.multiply(identity, ixyz2.get([0,0]))
+            ixyz2 = math.subtract(ixyz2, math.multiply(dColumn, math.transpose(dColumn)))
+            ixyz2 = math.dotMultiply(m.get([i,0]), ixyz2)
+
+            Ixyz = math.add(ixyz1, ixyz2)
+            It = math.add(It, Ixyz)
+       }
+
+       return {mt : mt, cmt : cmt, It : It}
     }
 
+    subtractByColumn(m, c) {
+        let n = math.size(m).get([1])
+
+        let newM = math.matrix().resize([3,3]);
+        for (let i = 0; i < n; i++)
+        {
+            for (let j = 0; j < n; j++) {
+                newM.set([j,i], c.get([j,0]))
+            }
+        }
+        return math.subtract(m, newM)
+    }
+
+    test() {
+
+    }
 
     checkForBlanks() {
     }
@@ -667,6 +736,7 @@ class Main extends React.Component {
                 <tr>
                     <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMinVel}/></td>
                     <td><Button variant="contained" color="primary" onClick={this.calculate}>Calculate</Button></td>
+                    <td><Button variant="contained" color="primary" onClick={this.test}>Test</Button></td>
                 </tr>
                 <tr>
                     <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMaxVel}/></td>
