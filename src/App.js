@@ -7,6 +7,9 @@ import SimpleMenu from './components/SimpleMenu'
 import PersistentDrawerLeft from './components/PersistentDrawerLeft'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="App">

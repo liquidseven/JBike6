@@ -83,6 +83,10 @@ class PersistentDrawerLeft extends React.Component {
     open: false,
   };
 
+  handleClick(e) {
+    console.log(e)
+  }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -135,7 +139,7 @@ class PersistentDrawerLeft extends React.Component {
           <Divider />
           <List>
             {['Program', 'Program Help', 'Credit', 'Math', 'Video'].map((text, index) => (
-              <ListItem button key={text}>
+              <ListItem button key={text} onClick={this.handleClick}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <BuildIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

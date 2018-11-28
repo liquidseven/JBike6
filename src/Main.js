@@ -15,89 +15,89 @@ class Main extends React.Component {
             this.state = {
 
                 bike : {
-                    bikeName : "",
-                    headAngle : 0.0,
+                    bikeName : "Schwinn Crown",
+                    headAngle : 70.977782,
                     angleMeasurement: 0,
-                    wheelBase : 0.0,
-                    trail : 0.0
+                    wheelBase : 1.016,
+                    trail : 0.090968
                 },
                 
                 velocity : {
                     minVel : 0,
-                    maxVel : 0,
-                    steps : 0
+                    maxVel : 10,
+                    steps : 101
                 },
 
                 rearWheel : {
-                    diameter : 0.0,
-                    mass : 0.0,
-                    lxxlyy : 0.0,
-                    lzz : 0.0,
+                    diameter : 0.6858,
+                    mass : 1.818182,
+                    lxxlyy : 0.085513,
+                    lzz : 0.171026,
                     inertia : 0.0
                 },
 
                 frontWheel : {
-                    diameter : 0.0,
-                    mass : 0.0,
-                    lxxlyy : 0.0,
-                    lzz : 0.0,
+                    diameter : 0.6858,
+                    mass : 1.818182,
+                    lxxlyy : 0.085513,
+                    lzz : 0.171026,
                     inertia :0.0
                 },
 
                 rearFrame : {
-                    x : 0.0,
-                    y : 0.0,
-                    mass : 0.0,
-                    l11 : 0.0,
-                    l22 : 0.0,
-                    lzz : 0.0,
-                    alpha : 0.0
+                    x : 0.3,
+                    y : 0.5,
+                    mass : 2.5,
+                    l11 : 0.058579,
+                    l22 : 0.341421,
+                    lzz : 0.4,
+                    alpha : 22.499995
                 },
 
                 rider : {
-                    x : 0.0,
-                    y : 0.0,
-                    mass : 0.0,
-                    l11 : 0.0,
-                    l22 : 0.0,
-                    lzz : 0.0,
-                    alpha : 0.0
+                    x : 0.3,
+                    y : 1.2,
+                    mass : 80,
+                    l11 : 10.531129,
+                    l22 : 2.468871,
+                    lzz : 12,
+                    alpha : -14.872437
                 },
 
                 rearRack : {
-                    x : 0.0,
-                    y : 0.0,
-                    mass : 0.0,
-                    l11 : 0.0,
-                    l22 : 0.0,
-                    lzz : 0.0,
-                    alpha : 0.0
+                    x : -0.1,
+                    y : 0.8,
+                    mass : 2,
+                    l11 : 0.02,
+                    l22 : 0.02,
+                    lzz : 0.02,
+                    alpha : 0
                 },
 
                 frontFork : {
-                    x : 0.0,
-                    y : 0.0,
-                    mass : 0.0,
-                    l11 : 0.0,
-                    l22 : 0.0,
-                    lzz : 0.0,
-                    alpha : 0.0
+                    u : 0,
+                    v : 0.6858,
+                    mass : 1.5,
+                    l11 : 0.05879,
+                    l22 : 0.000588,
+                    lzz : 0.05879,
+                    alpha : 19.022199
                 },
 
                 frontBasket : {
-                    x : 0.0,
-                    y : 0.0,
-                    mass : 0.0,
-                    l11 : 0.0,
-                    l22 : 0.0,
-                    lzz : 0.0,
-                    alpha : 0.0
+                    u : 0.15,
+                    v : 0.8,
+                    mass : 1.5,
+                    l11 : 0.01,
+                    l22 : 0.01,
+                    lzz : 0.01,
+                    alpha : 0
                 },
 
                 xy_uv : 0
             }
 
-        let gravity = 9.80665;
+        this.gravity = 9.80665;
         let startTime;
         let endTime;
 
@@ -158,16 +158,16 @@ class Main extends React.Component {
         this.getRearRackLzz = this.getRearRackLzz.bind(this);
         this.getRearRackAlpha = this.getRearRackAlpha.bind(this);
 
-        this.getFrontForkX = this.getFrontForkX.bind(this);
-        this.getFrontForkY = this.getFrontForkY.bind(this);
+        this.getFrontForkU = this.getFrontForkU.bind(this);
+        this.getFrontForkV = this.getFrontForkV.bind(this);
         this.getFrontForkMass = this.getFrontForkMass.bind(this);
         this.getFrontForkL11 = this.getFrontForkL11.bind(this);
         this.getFrontForkL22 = this.getFrontForkL22.bind(this);
         this.getFrontForkLzz = this.getFrontForkLzz.bind(this);
         this.getFrontForkAlpha = this.getFrontForkAlpha.bind(this);
 
-        this.getFrontBasketX = this.getFrontBasketX.bind(this);
-        this.getFrontBasketY = this.getFrontBasketY.bind(this);
+        this.getFrontBasketU = this.getFrontBasketU.bind(this);
+        this.getFrontBasketV = this.getFrontBasketV.bind(this);
         this.getFrontBasketMass = this.getFrontBasketMass.bind(this);
         this.getFrontBasketL11 = this.getFrontBasketL11.bind(this);
         this.getFrontBasketL22 = this.getFrontBasketL22.bind(this);
@@ -182,14 +182,16 @@ class Main extends React.Component {
         this.rearFrameCallbacks = [this.getRearFrameX, this.getRearFrameY, this.getRearFrameMass, this.getRearFrameL11, this.getRearFrameL22, this.getRearFrameLzz, this.getRearFrameAlpha]
         this.riderCallbacks = [this.getRiderX, this.getRiderY, this.getRiderMass, this.getRiderL11, this.getRiderL22, this.getRiderLzz, this.getRiderAlpha]
         this.rearRackCallbacks = [this.getRearRackX, this.getRearRackY, this.getRearRackMass, this.getRearRackL11, this.getRearRackL22, this.getRearRackLzz, this.getRearRackAlpha]
-        this.frontForkCallbacks = [this.getFrontForkX, this.getFrontForkY, this.getFrontForkMass, this.getFrontForkL11, this.getFrontForkL22, this.getFrontForkLzz, this.getFrontForkAlpha]
-        this.frontBasketCallbacks = [this.getFrontBasketX, this.getFrontBasketY, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
+        this.frontForkCallbacks = [this.getFrontForkU, this.getFrontForkV, this.getFrontForkMass, this.getFrontForkL11, this.getFrontForkL22, this.getFrontForkLzz, this.getFrontForkAlpha]
+        this.frontBasketCallbacks = [this.getFrontBasketU, this.getFrontBasketV, this.getFrontBasketMass, this.getFrontBasketL11, this.getFrontBasketL22, this.getFrontBasketLzz, this.getFrontBasketAlpha]
         
         this.setXyUv = this.setXyUv.bind(this)
         this.subtractByColumn = this.subtractByColumn.bind(this)
         this.calculate = this.calculate.bind(this)
         this.addMassInertia = this.addMassInertia.bind(this)
+        this.getRow = this.getRow.bind(this)
         this.test = this.test.bind(this)
+        this.conv = this.conv.bind(this)
         this.test();
         }
 
@@ -405,13 +407,13 @@ class Main extends React.Component {
         this.setState({rearRack : newRearRack})
     }
 
-    getFrontForkX(data) {
+    getFrontForkU(data) {
         let newFrontFork = this.state.frontFork
         newFrontFork.x = data
         this.setState({frontFork : newFrontFork})
     }
 
-    getFrontForkY(data) {
+    getFrontForkV(data) {
         let newFrontFork = this.state.frontFork
         newFrontFork.y = data
         this.setState({frontFork : newFrontFork})
@@ -447,13 +449,13 @@ class Main extends React.Component {
         this.setState({frontFork : newFrontFork})
     }
 
-    getFrontBasketX(data) {
+    getFrontBasketU(data) {
         let newFrontBasket = this.state.frontBasket
         newFrontBasket.x = data
         this.setState({frontBasket : newFrontBasket})
     }
 
-    getFrontBasketY(data) {
+    getFrontBasketV(data) {
         let newFrontBasket = this.state.frontBasket
         newFrontBasket.y = data
         this.setState({frontBasket : newFrontBasket})
@@ -566,31 +568,24 @@ class Main extends React.Component {
         let rearRackLzz = parseFloat(this.state.rearRack.lzz)
         let rearRackInertia = parseFloat(this.state.rearRack.alpha)
 
-        let frontForkX = parseFloat(this.state.frontFork.x)
-        let frontForkY = parseFloat(this.state.frontFork.y)
+        let frontForkU = parseFloat(this.state.frontFork.u)
+        let frontForkV = parseFloat(this.state.frontFork.v)
         let frontForkMass = parseFloat(this.state.frontFork.mass)
         let frontForkL11 = parseFloat(this.state.frontFork.l11)
         let frontForkL22 = parseFloat(this.state.frontFork.l22)
         let frontForkLzz = parseFloat(this.state.frontFork.lzz)
         let frontForkInertia = parseFloat(this.state.frontFork.alpha)
 
-        let frontBasketX = parseFloat(this.state.frontBasket.x)
-        let frontBasketY = parseFloat(this.state.frontBasket.y)
+        let frontBasketU = parseFloat(this.state.frontBasket.u)
+        let frontBasketV = parseFloat(this.state.frontBasket.v)
         let frontBasketMass = parseFloat(this.state.frontBasket.mass)
         let frontBasketL11 = parseFloat(this.state.frontBasket.l11)
         let frontBasketL22 = parseFloat(this.state.frontBasket.l22)
         let frontBasketLzz = parseFloat(this.state.frontBasket.lzz)
         let frontBasketInertia = parseFloat(this.state.frontBasket.alpha)
 
-        let iFrontWheel  = math.matrix([[frontWheelLxxLyy], [frontWheelLxxLyy], [frontWheelLzz]])
-        let iFork = math.matrix([[frontForkL11], [frontForkL22], [frontForkLzz]])
-        let iBasket = math.matrix([[frontBasketL11], [frontBasketL22], [frontBasketLzz]])
-        let iRearWheel = math.matrix([[rearWheelLxxLyy], [rearWheelLxxLyy], [rearWheelLzz]])
-        let iFrame = math.matrix([[rearFrameL11], [rearFrameL22], [rearFrameLzz]])
-        let iRack = math.matrix([[rearRackL11], [rearRackL22], [rearRackLzz]])
-        let iRider = math.matrix([[riderL11], [riderL22], [riderLzz]])
-
-        if (headAngle === 0) {
+        if (angleMeasurement === 0) {
+            headAngle *= Math.PI/180
             rearWheelInertia *= Math.PI/180
             frontWheelInertia *= Math.PI/180
             rearFrameInertia *= Math.PI/180
@@ -618,48 +613,140 @@ class Main extends React.Component {
 
         let lambda = Math.PI / 2 - headAngle
 
-        
-
         let R1 = math.matrix([[Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)]])
-        //let O1 = math.matrix([[wheelBase + trail], [0]])
-        let O1 = math.matrix([[2], [4]])
-        let x = O1.get([0,0])
-        let y = O1.get([1,0])
-        let p0 = math.eval('R1[1:1,:] + x', {R1, x})
-        let p1 = math.eval('R1[2:2,:] + y', {R1, y})
-        //let uvFork = math.matrix([[frontForkX], [frontForkY]])
-        //let uvBasket = math.matrix([[frontBasketX], [frontBasketY]])
-        let uvFork = math.matrix([[2], [3]])
-        let uvBasket = math.matrix([[3], [5]])
+        let O1 = math.matrix([[wheelBase + trail], [0]])
 
-        let p = math.matrix([[p0.get([0,0]), p0.get([0,1])], [p1.get([0,0]), p1.get([0,1])]])
+        let p = math.multiply(R1, math.matrix([[frontForkU], [frontForkV]]))
+        p = math.add(O1, p)
 
-        let pFork = math.multiply(p,uvFork)
-        let xcmFork = pFork.get([0,0])
-        let ycmFork = pFork.get([1,0])
+        let xcmFork = p.get([0,0])
+        let ycmFork = p.get([1,0])
 
-        let pBasket = math.multiply(p,uvBasket)
-        let xcmBasket = pBasket.get([0,0])
-        let ycmBasket = pBasket.get([1,0])
+        p = math.multiply(R1, math.matrix([[frontBasketU], [frontBasketV]]))
+        p = math.add(O1, p)
+
+        let xcmBasket = p.get([0,0])
+        let ycmBasket = p.get([1,0])
+
 
         let massMatrix = math.matrix([[frontWheelMass], [frontForkMass], [frontBasketMass], [rearWheelMass], [rearFrameMass], [rearRackMass], [riderMass]])
+
         let centerMassMatrix = math.matrix([[wheelBase, frontWheelDiamter / 2], [xcmFork, ycmFork], [xcmBasket, ycmBasket], [0, rearWheelDiamter/2], [rearFrameX, rearFrameY], [rearRackX, rearRackY], [riderX, riderY]])
-        let inertiaMatrix = math.matrix([[iFrontWheel], [iFork], [iBasket], [iRearWheel], [iFrame], [iRack], [iRider]]);
+
+        let inertiaMatrix = math.matrix([[frontWheelLxxLyy, frontWheelLxxLyy, frontWheelLzz], [frontForkL11, frontForkL22, frontForkLzz], [frontBasketL11, frontBasketL22, frontBasketLzz], [rearWheelLxxLyy, rearWheelLxxLyy, rearWheelLzz], 
+            [rearFrameL11, rearFrameL22, rearFrameLzz], [rearRackL11, rearRackL22, rearRackLzz], [riderL11, riderL22, riderLzz]]);
+
         let alphaCenterMass = math.matrix([[frontWheelInertia], [frontForkInertia], [frontBasketInertia], [rearWheelInertia], [rearFrameInertia], [rearRackInertia], [riderInertia]])
 
-        console.log(iFrontWheel)
-        //let massInertiaBody = this.addMassInertia(massMatrix, centerMassMatrix, inertiaMatrix, alphaCenterMass)
-
-        //console.log(massInertiaBody)
+        let mf = this.addMassInertia(massMatrix.subset(math.index([0,1,2], [0])), centerMassMatrix.subset(math.index([0,1,2], [0,1])), inertiaMatrix.subset(math.index([0,1,2], [0,1,2])), alphaCenterMass.subset(math.index([0,1,2], [0])))
+        let mt = this.addMassInertia(massMatrix, centerMassMatrix, inertiaMatrix, alphaCenterMass)
         
+        let cmtO = math.matrix([ [mt.cmt.get([0,0])], [mt.cmt.get([0,1])], [0] ])
+        
+        let ItO = math.multiply(math.multiply(math.transpose(cmtO), cmtO).get([0,0]), math.identity(3))
+        ItO = math.subtract(ItO, math.multiply(cmtO, math.transpose(cmtO)))
+        ItO = math.add(mt.It, math.dotMultiply(mt.mt, ItO))
+        let Txx = ItO.get([0,0])
+        let Txy = ItO.get([0,1])
+        let Tyy = ItO.get([1,1])
+
+        R1 = math.matrix([ [Math.cos(lambda), -Math.sin(lambda)], [Math.sin(lambda), Math.cos(lambda)]])
+        let cmfuv = math.multiply(math.transpose(R1), math.subtract(math.transpose(mf.cmt), math.matrix([[wheelBase + trail], [0]])))
+
+        let d = cmfuv.get([0,0])
+
+        let ldir = math.matrix([ [-Math.sin(lambda)], [Math.cos(lambda)], [0]])
+        let xdir = math.matrix([ [1], [0], [0]])
+        let ydir = math.matrix([ [0], [1], [0]])
+
+        let Fll = math.add(math.multiply(math.multiply(mf.mt, d), d), math.multiply(math.multiply(math.transpose(ldir), mf.It), ldir))
+        let Flx = math.add(math.multiply(math.multiply(-mf.mt , mf.cmt.get([0,1])), d), math.multiply(math.multiply(math.transpose(xdir), mf.It), ldir))
+        let Fly = math.add(math.multiply(math.multiply(mf.mt , mf.cmt.get([0,0])), d), math.multiply(math.multiply(math.transpose(ydir), mf.It), ldir))
+
+        let cw = wheelBase
+        let cf = trail * Math.cos(lambda)
+        let Sr = rearWheelLzz / (rearWheelDiamter / 2)
+        let Sf = frontWheelLzz / (frontWheelDiamter / 2)
+        let St = Sr + Sf
+
+        let nu = math.add(math.multiply(mf.mt, d), math.multiply(math.multiply(mt.mt, mt.cmt.get([0,0])), (cf / cw)))
+        
+        let M0 = math.zeros(2,2)
+        M0.set([0,0], Txx)
+        M0.set([0,1], math.add(Flx, math.multiply((cf/cw), Txy)).get([0,0]))
+        M0.set([1,0], M0.get([0,1]))
+        M0.set([1,1], math.add(math.add(Fll, math.multiply((2 * (cf/cw)), Fly)), math.multiply((cf/cw) ** 2, Tyy)).get([0,0]))
+
+        let C1 = math.zeros(2,2)
+        C1.set([0,0], 0)
+        C1.set([0,1], -(Sf * Math.cos(lambda) + (cf/cw) * St) + Txy * Math.cos(lambda) / cw - (cf/cw) * mt.mt * mt.cmt.get([0,1]))
+        C1.set([1,0], Sf * Math.cos(lambda) + (cf/cw) * St)
+        C1.set([1,1], math.add(math.multiply(Math.cos(lambda) / cw, Fly), (cf/cw) * (nu+Math.cos(lambda)/cw * Tyy)).get([0,0]))
+
+        let g = this.gravity
+        let K0 = math.zeros(2,2)
+        K0.set([0,0], -g * mt.mt * mt.cmt.get([0,1]))
+        K0.set([0,1], g * nu)
+        K0.set([1,0], K0.get([0,1]))
+        K0.set([1,1], -g*nu*Math.sin(lambda))
+
+        let K2 = math.zeros(2,2)
+        K2.set([0,0], 0)
+        K2.set([0,1], -Math.cos(lambda) / cw * (St+mt.mt* mt.cmt.get([0,1])))
+        K2.set([1,0], 0)
+        K2.set([1,1], Math.cos(lambda) / cw * (Math.sin(lambda) * Sf + nu))
+
+        let m1 = M0.get([0,0])
+        let m2 = M0.get([0,1])
+        let m3 = M0.get([1,1])
+
+        let c1 = C1.get([0,1])
+        let c2 = C1.get([1,0])
+        let c3 = C1.get([1,1])
+
+        let k01 = K0.get([0,0])
+        let k02 = K0.get([0,1])
+        let k03 = K0.get([1,1])
+
+        let k21 = K2.get([0,1])
+        let k22 = K2.get([1,1])
+
+        let Apc = m1 * m3 - m2 ** 2
+        let Bpc = math.matrix([ [m1 * c3 - m2 * c2 - c1 * m2, 0] ])
+        let Cpc = math.matrix([ [ m1 * k22 - c1 * c2 - k21 * m2, 0, m1 * k03 + k01 * m3-2 * m2 * k02]])
+        let Dpc = math.matrix([ [-k21 * c2, 0, k01 * c3 - c1 * k02 - k02 * c2, 0]])
+        let Epc = math.matrix([ [k01 * k22 - k21 * k02, 0, k01 * k03 - k02 ** 2]])
+
+        if (APC === 0)
+            console.log('Warning; Determinant of Mass Matrix = 0')
+        if (APC < 0)
+            console.log('Determinant of Mass Matrix < 0')
+
+
+
+
+    }
+
+    conv(u, v) {
+        let m = u.length
+        let n = v.length
+        let k = m + n - 1
+
+        let j = math.matrix([ [Math.max(1, k+1-n), Math.min(k,m)] ])
+        let result = math.zeros(k, k)
+
+        for (let i = 0; i < k; i++) {
+            
+        }
+        // for (let i = 0; i < k; i++) {
+        //     for (let h = 0; h < k; h++) {
+        //         result.set([h,i], math.sum(j.get([0,])))
+        //     }
+        // }
     }
 
 
     addMassInertia(m, cm, I, a) {
-        // let m = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
-        // let cm = math.matrix([[1,2], [3,4], [5,6], [7,8], [9,10], [11,12], [13,14]])
-        // let I = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
-        // let a = math.matrix([[1], [2], [3], [4], [5], [6], [7]])
 
         let n = math.size(m).get([0])
         let mt = math.sum(m)
@@ -685,7 +772,7 @@ class Main extends React.Component {
        for (let i = 0; i < n; i++) {
             q = a.get([i,0])
             R = math.matrix([[Math.cos(q), -Math.sin(q), 0], [Math.sin(q), Math.cos(q), 0], [0, 0, 1]])
-            Iuvz = I.get([i,0])
+            Iuvz = math.diag(this.getRow(I,i,1)[0])
             d1 = math.matrix([[cm.get([i,0])], [cm.get([i,1])], [0]])
             d2 = math.matrix([[cmt.get([0,0])], [cmt.get([0,1])], [0]])
             dColumn = math.subtract(d1,d2)
@@ -705,6 +792,21 @@ class Main extends React.Component {
        return {mt : mt, cmt : cmt, It : It}
     }
 
+    getRow(m, i, a) {
+        let newM = math.matrix()
+        let n = math.size(m).get([1])
+
+        for (let j = 0; j < n; j++) {
+            newM.set([0,j], m.get([i,j]))
+        }
+
+        if (a === 0)
+            return newM
+        else
+            return newM.valueOf()
+
+    }
+
     subtractByColumn(m, c) {
         let n = math.size(m).get([1])
 
@@ -719,6 +821,7 @@ class Main extends React.Component {
     }
 
     test() {
+
 
     }
 
