@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import BuildIcon from '@material-ui/icons/Build';
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -83,10 +84,6 @@ class PersistentDrawerLeft extends React.Component {
     open: false,
   };
 
-  handleClick(e) {
-    console.log(e)
-  }
-
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -138,11 +135,13 @@ class PersistentDrawerLeft extends React.Component {
           </div>
           <Divider />
           <List>
-            {['Program', 'Program Help', 'Credit', 'Math', 'Video'].map((text, index) => (
-              <ListItem button key={text} onClick={this.handleClick}>
+            {['Program', 'Program Help', 'Eigenvalues', 'Math', 'Video', 'Credit'].map((text, index) => (
+              <Link to={text.toLowerCase().replace(/\s+/g,'')} >
+              <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <BuildIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
+              </Link>
             ))}
           </List>
           <Divider />

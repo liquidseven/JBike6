@@ -192,7 +192,6 @@ class Main extends React.Component {
         this.getRow = this.getRow.bind(this)
         this.test = this.test.bind(this)
         this.conv = this.conv.bind(this)
-        this.test();
         }
 
     getBikeName(data) {
@@ -717,9 +716,11 @@ class Main extends React.Component {
         let Dpc = math.matrix([ [-k21 * c2, 0, k01 * c3 - c1 * k02 - k02 * c2, 0]])
         let Epc = math.matrix([ [k01 * k22 - k21 * k02, 0, k01 * k03 - k02 ** 2]])
 
-        if (APC === 0)
+        let BCD = this.conv(Bpc, Cpc)
+
+        if (Apc === 0)
             console.log('Warning; Determinant of Mass Matrix = 0')
-        if (APC < 0)
+        if (Apc < 0)
             console.log('Determinant of Mass Matrix < 0')
 
 
@@ -728,21 +729,32 @@ class Main extends React.Component {
     }
 
     conv(u, v) {
-        let m = u.length
-        let n = v.length
-        let k = m + n - 1
-
-        let j = math.matrix([ [Math.max(1, k+1-n), Math.min(k,m)] ])
-        let result = math.zeros(k, k)
-
-        for (let i = 0; i < k; i++) {
-            
+        let m = u.size()
+        let n = v.size()
+        let s
+        if (m[1] > n[1]) {
+            s = m
         }
-        // for (let i = 0; i < k; i++) {
-        //     for (let h = 0; h < k; h++) {
-        //         result.set([h,i], math.sum(j.get([0,])))
-        //     }
-        // }
+        else
+            s = n
+
+        let U = math.resize(u, s)
+        let V = math.resize(v, s)
+
+
+        let k = m[1] + n[1]
+        let C = math.zeros(k)
+        for (let i = 0; i < k; i++) {
+            //let C = math.matrix()
+            for (let j = 0; j < m[1]; j++) {
+                if (i - j > 0) {
+                    let r = math.multiply(U.get([0,j]), V.get([0, i-j]))
+                    C.set([0,i], math.add(C.get([i]), r))
+                }
+            }
+        }
+
+        return C
     }
 
 
