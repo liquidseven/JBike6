@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import Typography from '@material-ui/core/Typography';
 
 class Eigenvalues extends Component {
     render() {
         return(
             <div>
-                <h1>>JBike6 Eigenvalues</h1>
-Eigenvalues
+                <Typography paragraph>
+
+                
 
 Eigenvalues are defined as the scalar quantities λ such that for matrix [A], if there is a non-zero vector x for which this equation [A]x = λx is true, then x is an eigenvector of [A] and λ is its corresponding eigenvalue. Another way to think of them is that if the matrix [A] is a transformation, then the eigenvectors of [A] are those vectors whose directions are not changed by that transformation, and the corresponding eigenvalues are how much the magnitudes or lengths of those eigenvectors are changed.
 
@@ -22,6 +24,7 @@ Any linear time-evolving, time-independent equations have the property that the 
 So, eigenvalues are often found by relatively simple calculations, on the way to determining eigensolutions. For example when written in state space form, eigenvalues they are identified as 'expansion numbers' that make it possible to find self-similar (exponential) solutions, by the vanishing of a determinant (polynomial).
 
 Another excellent on-line article about eigenvalues, eigenvectors, eigenspaces, and some of their applications can be found in Wikipedia.
+                </Typography>
             </div>
         )
     }

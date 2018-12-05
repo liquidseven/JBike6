@@ -8,9 +8,9 @@ class ProgramHelp extends Component {
 
     render() {
         return(
-            <div>
+            <div> 
                 <CssBaseline />
-                <Typography paragraph>
+                <Typography gutterBottom align="left" >
                 Using JBike6
 You can specify the mass, location, orientation, and inertia for all the bodies that make up a bike, or you can load a previously saved parameter set from the pull-down menu in the upper left of the window.
 
