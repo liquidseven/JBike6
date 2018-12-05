@@ -8,6 +8,7 @@ import Eigenvalues from './Eigenvalues'
 import SelfStability from './SelfStability'
 import ProgramHelp from './ProgramHelp'
 import Credit from './Credit'
+import { Typography } from '@material-ui/core';
 
 
 
@@ -20,6 +21,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Typography component="h2" variant="h2" gutterBottom> {/** This fixes appBar blocking text */}
+          &nbsp; {/**Just a whitespace */}
+        </Typography>
         <PersistentDrawerLeft />
         <CssBaseline />
         <Switch>

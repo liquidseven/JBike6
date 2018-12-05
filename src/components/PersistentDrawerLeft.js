@@ -16,8 +16,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import BuildIcon from '@material-ui/icons/Build';
+import Help from '@material-ui/icons/Help';
+import MergeType from '@material-ui/icons/MergeType';
+import VideoCam from '@material-ui/icons/Videocam';
+import DirectionsBike from '@material-ui/icons/DirectionsBike';
+import AllInclusive from '@material-ui/icons/AllInclusive';
+import CheckBox from '@material-ui/icons/CheckBox';
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -138,7 +142,14 @@ class PersistentDrawerLeft extends React.Component {
             {['Program', 'Program Help', 'Eigenvalues', 'Math', 'Video', 'Credit'].map((text, index) => (
               <Link to={text.toLowerCase().replace(/\s+/g,'')} >
               <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <BuildIcon />}</ListItemIcon>
+                <ListItemIcon>
+                {index === 0 ? <DirectionsBike /> : null}
+                {index === 1 ? <Help /> : null}
+                {index === 2 ? <MergeType /> : null}
+                {index === 3 ? <AllInclusive /> : null}
+                {index === 4 ? <VideoCam /> : null}
+                {index === 5 ? <CheckBox /> : null}
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
               </Link>
@@ -149,7 +160,7 @@ class PersistentDrawerLeft extends React.Component {
       </div>
     );
   }
-}
+} 
 
 PersistentDrawerLeft.propTypes = {
   classes: PropTypes.object.isRequired,
