@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Main from './Main';
+import Main from './components/Main';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Switch, Route} from 'react-router-dom'
 import PersistentDrawerLeft from './components/PersistentDrawerLeft'
@@ -13,10 +13,6 @@ import { Typography } from '@material-ui/core';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   render() {
     return (

@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import { CssBaseline, Typography } from '@material-ui/core';
 
 class ProgramHelp extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return(

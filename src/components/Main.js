@@ -3,8 +3,8 @@ import Bike from './Bike';
 import Component from './Component'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Matrix from './Matrix.js'
 import './Main.css'
+import Graph from './Graph.js'
 
 const math = require('mathjs')
 
@@ -192,6 +192,7 @@ class Main extends React.Component {
         this.getRow = this.getRow.bind(this)
         this.test = this.test.bind(this)
         this.conv = this.conv.bind(this)
+        this.combine = this.combine.bind(this)
         }
 
     getBikeName(data) {
@@ -710,52 +711,60 @@ class Main extends React.Component {
         let k21 = K2.get([0,1])
         let k22 = K2.get([1,1])
 
-        let Apc = m1 * m3 - m2 ** 2
+        let Apc = math.matrix([[m1 * m3 - m2 ** 2]])
         let Bpc = math.matrix([ [m1 * c3 - m2 * c2 - c1 * m2, 0] ])
         let Cpc = math.matrix([ [ m1 * k22 - c1 * c2 - k21 * m2, 0, m1 * k03 + k01 * m3-2 * m2 * k02]])
         let Dpc = math.matrix([ [-k21 * c2, 0, k01 * c3 - c1 * k02 - k02 * c2, 0]])
         let Epc = math.matrix([ [k01 * k22 - k21 * k02, 0, k01 * k03 - k02 ** 2]])
 
-        let BCD = this.conv(Bpc, Cpc)
-
         if (Apc === 0)
             console.log('Warning; Determinant of Mass Matrix = 0')
         if (Apc < 0)
-            console.log('Determinant of Mass Matrix < 0')
+            throw new Error('Determinant of Mass Matrix < 0')
 
+        let BCD = this.conv(this.conv(Bpc, Cpc), Dpc)
+        let ADD = this.conv(this.conv(Apc,Dpc),Dpc)
+        let EBB = this.conv(this.conv(Epc,Bpc), Bpc)
 
+        BCD = BCD.size()[1] < 7 ? math.concat(math.zeros(1,7 - BCD.size()[1]), BCD) : BCD
+        ADD = ADD.size()[1] < 7 ? math.concat(math.zeros(1,7 - ADD.size()[1]), ADD) : ADD
+        EBB = EBB.size()[1] < 7 ? math.concat(math.zeros(1,7 - EBB.size()[1]), EBB) : EBB
 
+        let Fpc = math.subtract(math.subtract(BCD,ADD), EBB)
+
+        let Vsi = math.matrix([ [-Infinity, 0], [0, 1] ])
 
     }
 
-    conv(u, v) {
-        let m = u.size()
-        let n = v.size()
-        let s
-        if (m[1] > n[1]) {
-            s = m
-        }
-        else
-            s = n
+    combine(A, B, fcombi) {
 
-        let U = math.resize(u, s)
-        let V = math.resize(v, s)
+    }
 
+    conv(x, h) {
+        let m = x.size()[1]
+        let n = h.size()[1]
 
-        let k = m[1] + n[1]
-        let C = math.zeros(k)
-        for (let i = 0; i < k; i++) {
-            //let C = math.matrix()
-            for (let j = 0; j < m[1]; j++) {
-                if (i - j > 0) {
-                    let r = math.multiply(U.get([0,j]), V.get([0, i-j]))
-                    C.set([0,i], math.add(C.get([i]), r))
+        x = math.resize(x, [1,n+m])
+        h = math.resize(h, [1,n+m])
+
+        let y = math.zeros(1,n + m - 1)
+
+        for (let i = 0; i < (n+m -1); i++) {
+            for (let j = 0; j < m; j++) {
+                if (i - j >= 0) {
+                let t = math.multiply(x.get([0,j]), h.get([0,i-j]))
+                y.set([0,i], math.add(y.get([0,i]), t))
                 }
             }
         }
 
-        return C
+        return y
     }
+
+    resize(m, n) {
+
+    }
+
 
 
     addMassInertia(m, cm, I, a) {
@@ -843,6 +852,7 @@ class Main extends React.Component {
     render() {
         return (
         <div>
+            
             <Bike action={this.bikeCallbacks}/>
             <h2>Forward Speeds</h2>
             <br />
@@ -864,6 +874,7 @@ class Main extends React.Component {
             </table>
             <Component rearWheelAction={this.rearWheelCallbacks} frontWheelAction={this.frontWheelCallbacks} rearFrameAction={this.rearFrameCallbacks} riderAction={this.riderCallbacks} rearRackAction={this.rearRackCallbacks} frontForkAction={this.frontForkCallbacks}
             frontBasketAction={this.frontBasketCallbacks} xyuvAction={this.setXyUv}/>
+            <Graph />
         </div>
         )
     }
