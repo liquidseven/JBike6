@@ -27,3 +27,10 @@ npm run start
 ```
 
 Jbike6 should open up in your web browser locally on port 3000
+
+
+## Authors
+#### Original Jbike6 Matlab
+* [Arend L. Schwab](http://bicycle.tudelft.nl/schwab/) - Assistant Professor of Applied Mechanics at Delft University of Technology. Wrote the main JBike6 engine in MATLAB.
+
+* [Jim Papadopoulos] - Contributing Author of [Bicycling Science : Third Edition](https://mitpress.mit.edu/books/bicycling-science). Created the JBike concept and monitored its development. Worked closely with Scott Hand on his Master’s Thesis at Cornell University: [Comparisons and Stability Analysis of Linearized Equations of Motion for a Basic Bicycle Model](http://ruina.tam.cornell.edu/research/topics/bicycle_mechanics/comparisons_stability_analysis.pdf)
