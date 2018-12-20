@@ -41,3 +41,6 @@ Jbike6 should open up in your web browser locally on port 3000
 #### Jbike6 Web Application
 *  Matthew Young - CS Major University of Wisconsin-Milwaukee
 *  Adam Skwierawski - CS Major University of Wisconsin-Milwaukee
+
+### About
+This project was bootstrapped with [create-react-app](https://github.com/csepulv/electron-with-create-react-app/blob/master/create-react-app-readme.md)
