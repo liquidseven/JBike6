@@ -39,5 +39,5 @@ Jbike6 should open up in your web browser locally on port 3000
 
 * [Andrew Dressel](https://www.linkedin.com/in/andrewdressel) - Graduate Student of Theoretical & Applied Mechanics at Cornell University. Created JBike6 GUI, on-line help, and original [Jbike6 website](http://ruina.tam.cornell.edu/research/topics/bicycle_mechanics/JBike6_web_folder/index.htm)
 #### Jbike6 Web Application
-* Matthew Young - CS Major University of Wisconsin-Milwaukee
-* Adam Skwierawski - CS Major University of Wisconsin-Milwaukee
+*  Matthew Young - CS Major University of Wisconsin-Milwaukee
+*  Adam Skwierawski - CS Major University of Wisconsin-Milwaukee
