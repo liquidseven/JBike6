@@ -1,6 +1,7 @@
 # JBike6
 Jbike6 is a web application of a matlab program for calculating the weave and capsize speeds of a modeled back
-More information and the actual matlab program found here (http://ruina.tam.cornell.edu/research/topics/bicycle_mechanics/JBike6_web_folder/index.htm)
+More information and the actual matlab program found here 
+[JBike6](http://ruina.tam.cornell.edu/research/topics/bicycle_mechanics/JBike6_web_folder/index.htm)
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
