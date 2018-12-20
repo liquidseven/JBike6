@@ -32,6 +32,12 @@ Jbike6 should open up in your web browser locally on port 3000
 
 ### TODO
 * Calculate function from the matlab program must be completed
+  - Jbcrit
+  - JbDoubleroots
+  - Jbeig
+    - linspace matlab function implemented into JS
+  - Jbroots
+  - Jbrev
 * Graph component must be completed to use that data
 * Static website portion must be completed
 * Error handling
