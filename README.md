@@ -30,6 +30,14 @@ npm run start
 
 Jbike6 should open up in your web browser locally on port 3000
 
+### TODO
+* Calculate function from the matlab program must be completed
+* Graph component must be completed to use that data
+* Static website portion must be completed
+* Error handling
+* MongoDB/JSON for saving Bikes
+* Styling to fit program on full viewable space on browser
+
 
 ## Authors
 #### Original Jbike6 Matlab
