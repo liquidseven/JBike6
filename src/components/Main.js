@@ -98,8 +98,6 @@ class Main extends React.Component {
             }
 
         this.gravity = 9.80665;
-        let startTime;
-        let endTime;
 
         let u = 0
         let v = 0
@@ -193,6 +191,8 @@ class Main extends React.Component {
         this.test = this.test.bind(this)
         this.conv = this.conv.bind(this)
         this.combine = this.combine.bind(this)
+        this.roots = this.roots.bind(this)
+        this.printMatrix = this.printMatrix.bind(this)
         }
 
     getBikeName(data) {
@@ -522,6 +522,8 @@ class Main extends React.Component {
         this.startTimeBegin();
 
         
+
+        
         let bikeName = this.state.bike.bikeName
         let wheelBase = parseFloat(this.state.bike.wheelBase)
         let headAngle = parseFloat(this.state.bike.headAngle)
@@ -584,6 +586,8 @@ class Main extends React.Component {
         let frontBasketLzz = parseFloat(this.state.frontBasket.lzz)
         let frontBasketInertia = parseFloat(this.state.frontBasket.alpha)
 
+        console.log(`name = ${bikeName}\n`)
+
         if (angleMeasurement === 0) {
             headAngle *= Math.PI/180
             rearWheelInertia *= Math.PI/180
@@ -629,6 +633,7 @@ class Main extends React.Component {
         let ycmBasket = p.get([1,0])
 
 
+        console.log('Calculating the linearized equations of motion...\n')
         let massMatrix = math.matrix([[frontWheelMass], [frontForkMass], [frontBasketMass], [rearWheelMass], [rearFrameMass], [rearRackMass], [riderMass]])
 
         let centerMassMatrix = math.matrix([[wheelBase, frontWheelDiamter / 2], [xcmFork, ycmFork], [xcmBasket, ycmBasket], [0, rearWheelDiamter/2], [rearFrameX, rearFrameY], [rearRackX, rearRackY], [riderX, riderY]])
@@ -734,6 +739,25 @@ class Main extends React.Component {
 
         let Vsi = math.matrix([ [-Infinity, 0], [0, 1] ])
 
+        this.roots([1,-6,-72,-27])
+
+    }
+
+    roots(coeficients) {
+        let N = coeficients.length - 1 
+        let c = math.zeros(N,N)
+        let a = coeficients[N]
+
+        for (let i = 0; i < N; i++) {
+            c.set([i,N-1], -coeficients[i]/a)
+        }
+        for (let i = 1; i < N; i++) {
+            c.set([i,i-1], 1)
+        }
+    }
+
+    polyInt(p) {
+        let A = math.matrix([[-Infinity, 1]])
     }
 
     combine(A, B, fcombi) {
@@ -808,9 +832,16 @@ class Main extends React.Component {
 
             Ixyz = math.add(ixyz1, ixyz2)
             It = math.add(It, Ixyz)
+           // this.printMatrix(It)
        }
 
        return {mt : mt, cmt : cmt, It : It}
+    }
+
+    printMatrix(m) {
+        for (let i = 0; i < m.size()[0]; i++)
+            console.log(m._data[i])
+
     }
 
     getRow(m, i, a) {
@@ -851,9 +882,8 @@ class Main extends React.Component {
 
     render() {
         return (
-        <div>
-            
-            <Bike action={this.bikeCallbacks}/>
+        <div> 
+            <Bike className='bike' action={this.bikeCallbacks}/>
             <h2>Forward Speeds</h2>
             <br />
             <table className="center">

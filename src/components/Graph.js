@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Line} from 'react-chartjs-2'
 import {Scatter} from 'react-chartjs-2'
 
 
@@ -93,7 +92,7 @@ class Graph extends Component {
     render() {
         return(
             <div>
-                <Scatter data={this.d} options={this.options.options} width="600" height="250"/>
+                <Scatter data={this.d} options={this.options.options} width={600} height={250}/>
             </div>
         )
     }

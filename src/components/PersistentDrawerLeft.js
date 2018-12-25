@@ -99,6 +99,7 @@ class PersistentDrawerLeft extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { open } = this.state;
+    const icons = [<DirectionsBike />, <Help />, <MergeType />, <AllInclusive />, <VideoCam />, <CheckBox />];
 
     return (
       <div className={classes.root}>
@@ -140,15 +141,10 @@ class PersistentDrawerLeft extends React.Component {
           <Divider />
           <List>
             {['Program', 'Program Help', 'Eigenvalues', 'Math', 'Video', 'Credit'].map((text, index) => (
-              <Link to={text.toLowerCase().replace(/\s+/g,'')} >
-              <ListItem button key={text}>
+              <Link to={text.toLowerCase().replace(/\s+/g,'')} key={text} >
+              <ListItem>
                 <ListItemIcon>
-                {index === 0 ? <DirectionsBike /> : null}
-                {index === 1 ? <Help /> : null}
-                {index === 2 ? <MergeType /> : null}
-                {index === 3 ? <AllInclusive /> : null}
-                {index === 4 ? <VideoCam /> : null}
-                {index === 5 ? <CheckBox /> : null}
+                  {icons[index]}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

@@ -1,15 +1,10 @@
 import React, { Component} from 'react'
 import { CssBaseline } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 
 class ProgramMath extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return(
             <div>
