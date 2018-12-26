@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { CssBaseline, Typography } from '@material-ui/core';
+import { CssBaseline, Typography, Paper, Grid } from '@material-ui/core';
 
 class ProgramHelp extends Component {
 
@@ -7,7 +7,12 @@ class ProgramHelp extends Component {
         return(
             <div> 
                 <CssBaseline />
+                <Typography align='left'variant="h3" gutterBottom >
+                Program Help
+                </Typography>
                 <Typography gutterBottom align="left" >
+                <Grid item xs={8}>
+                <Paper>
                 Using JBike6
 You can specify the mass, location, orientation, and inertia for all the bodies that make up a bike, or you can load a previously saved parameter set from the pull-down menu in the upper left of the window.
 
@@ -25,8 +30,12 @@ There is an option in the ‘Settings’ menu to turn on and off the display of 
 
 Specifying a new bike design
 There are two ways that you can specify a new bike design:
-
-1.      Start from scratch: select ‘Blank’ from the pull-down list of bikes. All the parameter values are zero. Type a new name and all the parameter values that you want. Then save the new design. JBike6 cannot work with a design you enter from scratch until you save it.
+                </Paper>
+                </Grid>
+                <br />
+                <Grid item xs={8}>
+                <Paper>
+                1.      Start from scratch: select ‘Blank’ from the pull-down list of bikes. All the parameter values are zero. Type a new name and all the parameter values that you want. Then save the new design. JBike6 cannot work with a design you enter from scratch until you save it.
 
 2.      Start with an existing design: select any pre-existing design from the pull-down list of bikes. Type a new name and change all the parameter values that you want.
 
@@ -56,7 +65,12 @@ There is an option in the ‘File’ menu to save the calculated eigenvalues alo
 
 You can open a MATLAB *.mat file with the ‘load’ command at the MATLAB command prompt. See the MATLAB help for more details. You can open an ASCII text file in Notepad, Microsoft Excel, or similar application.
 
+                </Paper>
+                </Grid>
+                
 <br />
+<Grid item xs={8}>
+<Paper>
 The Parameters
 You specify a particular bike configuration by entering certain parameters. For the idealized model of a bike that JBike6 uses, the parameters that you can enter on the main window provide all the information that JBike6 needs to calculate the eigenvalues.
 
@@ -77,6 +91,8 @@ The wheelbase is the horizontal distance between the hub (or ground contact poin
 The head angle is the angle the head tube (steering axis) makes with the horizontal. A 90° head angle would be vertical. By convention, positive angles are clockwise from the horizontal. Common head angles for road bikes range from 70° to 75°. JBike6 accepts any angle, but angles close to 0° are not practical for steering.
 
 The trail is the horizontal distance from the front hub (or ground contact point) to the point where the steering axis intersects the ground. By convention, positive trail is when the front wheel contact point is behind, toward the rear wheel, the steering axis intersect point.
+</Paper>
+</Grid>
                 </Typography>
                 </div>
         );

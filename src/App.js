@@ -8,6 +8,7 @@ import Eigenvalues from './Eigenvalues'
 import Video from './Video'
 import ProgramHelp from './ProgramHelp'
 import Credit from './Credit'
+import ProgramMath from './ProgramMath'
 import { Typography } from '@material-ui/core';
 
 
@@ -27,6 +28,7 @@ class App extends Component {
         <Route path="/program" component={Main} />
         <Route path="/eigenvalues" component={Eigenvalues}/>
         <Route path="/Video" component={Video} />
+        <Route path="/Math" component={ProgramMath} />
         <Route path="/programhelp" component={ProgramHelp} />
         <Route path="/credit" component={Credit} />
         </Switch>

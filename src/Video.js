@@ -8,10 +8,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class Video extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return(
             <div>
@@ -33,7 +29,7 @@ class Video extends Component {
                 <Typography variant="h5"><b>Video 1 - (Bicycle in motion without external input)</b></Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                <iframe align ="center" width="560" height="315" src="https://www.youtube.com/embed/Zt7J0dly70M" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe align ="center" width="560" height="315" title="Bicycle Self-Stability" src="https://www.youtube.com/embed/Zt7J0dly70M" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <Typography variant = "h6" align="left">
                 &nbsp;The bike must meet a couple simple criteria:
                 <ul>
@@ -51,7 +47,7 @@ class Video extends Component {
                 <Typography variant="h5"><b>Video 2 - (Extended Video demonstating Cornell University Testing)</b></Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                <iframe width="560" align ="center" height="315" src="https://www.youtube.com/embed/-Bw0BlzOg5M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" align ="center" height="315" title="Wheel/Bike Stability" src="https://www.youtube.com/embed/-Bw0BlzOg5M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </ExpansionPanelDetails>
                 </ExpansionPanel>       
             </div>

@@ -1,23 +1,22 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
+import Button from '@material-ui/core/Button'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
 import './Component.css'
 
-const initialState = {
-        bikename : "",
-        headAngle : 0.0,
-        angleMeasurement: "0",
-        wheelBase : 0.0,
-        trail : 0.0
-}
 class Bike extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = initialState;
+        this.state = { bikeName: "Schwinn Crown"}
         this.handleHeadAngle = this.handleHeadAngle.bind(this);
         this.handleAngleMeasurement = this.handleAngleMeasurement.bind(this);
         this.handleWheelBase = this.handleWheelBase.bind(this);
@@ -25,22 +24,18 @@ class Bike extends React.Component {
     }
 
     handleHeadAngle(e) {
-        this.setState({headAngle : e.target.value})
         this.props.action[0](e.target.value);
     }
 
     handleAngleMeasurement(e) {
-        this.setState({angleMeasurement : e.target.value})
         this.props.action[1](e.target.value);
     }
 
     handleWheelBase(e) {
-        this.setState({wheelBase : e.target.value})
         this.props.action[2](e.target.value);
     }
 
     handleTrail(e) {
-        this.setState({trail : e.target.value})
         this.props.action[3](e.target.value);
     }
 
@@ -50,8 +45,19 @@ class Bike extends React.Component {
 
     render() {
         return (<div>
-            <table className="center">
+            <table>
             <tbody>
+                <tr>
+                    <td>
+                        <FormControl>
+                            <InputLabel htmlFor="bikeName">{this.state.bikeName}</InputLabel>
+                                <Select autoWidth={true} id="bikeName" value={this.state.bikename}>
+                                    <MenuItem value={this.state.bikeName}>{this.state.bikeName}</MenuItem>
+                                </Select>
+                        </FormControl>
+                    </td>
+                    <td><Button variant="contained" color="primary">Flip Fork</Button></td>
+                </tr>
             <tr>
                 <td><TextField id="name" label="Bike Name" name='name' margin='normal' onChange={this.handleBikeName}/></td>
                 <td><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></td>
