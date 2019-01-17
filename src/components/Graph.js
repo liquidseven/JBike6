@@ -1,10 +1,4 @@
 import React, {Component} from 'react'
-<<<<<<< HEAD
-import {Line} from 'react-chartjs-2'
-
-
-class Graph extends Component {
-=======
 import {Scatter} from 'react-chartjs-2'
 
 
@@ -94,16 +88,11 @@ class Graph extends Component {
         return lambda
 
     }
->>>>>>> a45deebab346462e2e5d33197cb8897982d25bb3
 
     render() {
         return(
             <div>
-<<<<<<< HEAD
-                <Line />
-=======
-                <Scatter data={this.d} options={this.options.options} width={600} height={250}/>
->>>>>>> a45deebab346462e2e5d33197cb8897982d25bb3
+                <Scatter data={this.d} options={this.options.options} width={250} height={100}/>
             </div>
         )
     }

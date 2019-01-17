@@ -4,6 +4,7 @@ import Component from './Component'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './Main.css'
+import './Forward.css'
 import Graph from './Graph.js'
 
 const math = require('mathjs')
@@ -191,11 +192,8 @@ class Main extends React.Component {
         this.test = this.test.bind(this)
         this.conv = this.conv.bind(this)
         this.combine = this.combine.bind(this)
-<<<<<<< HEAD:src/components/Main.js
-=======
         this.roots = this.roots.bind(this)
         this.printMatrix = this.printMatrix.bind(this)
->>>>>>> a45deebab346462e2e5d33197cb8897982d25bb3:src/components/Main.js
         }
 
     getBikeName(data) {
@@ -886,29 +884,38 @@ class Main extends React.Component {
 
     render() {
         return (
-        <div> 
-            <Bike className='bike' action={this.bikeCallbacks}/>
-            <h2>Forward Speeds</h2>
-            <br />
-            <table className="center">
-            <tbody>
-                <tr>
-                    <td><TextField id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMinVel}/></td>
-                    <td><Button variant="contained" color="primary" onClick={this.calculate}>Calculate</Button></td>
-                    <td><Button variant="contained" color="primary" onClick={this.test}>Test</Button></td>
-                </tr>
-                <tr>
-                    <td><TextField id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMaxVel}/></td>
-                    <td><Button variant="outlined" color="primary">Save Bike</Button></td>
-                </tr>
-                <tr>
-                <td><TextField id="steps" label="Steps" defaultValue="0" margin="normal" variant="outlined" onChange={this.getSteps}/></td>
-                </tr>
-            </tbody>
-            </table>
-            <Component rearWheelAction={this.rearWheelCallbacks} frontWheelAction={this.frontWheelCallbacks} rearFrameAction={this.rearFrameCallbacks} riderAction={this.riderCallbacks} rearRackAction={this.rearRackCallbacks} frontForkAction={this.frontForkCallbacks}
-            frontBasketAction={this.frontBasketCallbacks} xyuvAction={this.setXyUv}/>
-            <Graph />
+        <div id="main"> 
+            <div id="bike">
+                <Bike action={this.bikeCallbacks}/>
+            </div>
+            <div id="forward">
+                <div id="forward-header"><h2>Forward Speeds</h2></div>
+                <div id="minVel">
+                    <TextField className="txt" id="minVel" label="Minimum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMinVel}/>
+                </div>
+                <div id="calculate">
+                    <Button className="btn" variant="contained" color="primary" onClick={this.calculate}>Calculate</Button>
+                </div>
+                <div id="maxVel">
+                    <TextField className="txt" id="maxVel" label="Maximum Velocity (m/s)" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.getMaxVel}></TextField>
+                </div>
+                <div id="test">
+                    <Button className="btn" variant="contained" color="primary" onClick={this.test}>Test</Button>
+                </div>
+                <div id="steps">
+                    <TextField className="txt" id="steps" label="Steps" defaultValue="0" margin="normal" variant="outlined" onChange={this.getSteps}/>
+                </div>
+                <div id="Save">
+                    <Button className="btn" variant="outlined" color="primary">Save Bike</Button>
+                </div>
+            </div>
+            <div id="component">
+                <Component rearWheelAction={this.rearWheelCallbacks} frontWheelAction={this.frontWheelCallbacks} rearFrameAction={this.rearFrameCallbacks} riderAction={this.riderCallbacks} rearRackAction={this.rearRackCallbacks} frontForkAction={this.frontForkCallbacks}
+                    frontBasketAction={this.frontBasketCallbacks} xyuvAction={this.setXyUv}/>
+            </div>
+            <div id="graph">
+                <Graph />
+            </div>
         </div>
         )
     }

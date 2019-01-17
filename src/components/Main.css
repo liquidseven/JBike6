@@ -1,4 +1,60 @@
-.center {
-    margin-left : auto;
-    margin-right : auto;
+#main {
+    display: grid;
+    grid-gap: 2em 2em;
+    grid-template-areas: "bike forward" "component component" "graph graph";
+    grid-template-rows: [bikeForward] max-content [com] max-content [grap] max-content [stopend];
+    grid-template-columns: [one] 1fr [two] 1fr [stopendlast];
+}
+
+#bike {
+    grid-area: bike;
+}
+
+#forward {
+    grid-area: forward;
+    display: grid;
+    grid-template-areas: "for-head for-head" "max btn-calculate" "min btn-save" "steps test";
+    grid-template-columns: .25fr .5fr;
+}
+
+#forward-header {
+    grid-area:for-head;
+    margin-top:3em;
+}
+
+#minVel {
+    grid-area: min;
+}
+
+#maxVel {
+    grid-area: max;
+}
+
+#steps {
+    grid-area: steps;
+}
+
+
+#calculate {
+    grid-area: btn-calculate;
+}
+
+#save {
+    grid-area: btn-save;
+}
+
+#test {
+    grid-area: test;
+}
+#component {
+    grid-area:component;
+}
+
+#graph {
+    grid-area:graph;
+}
+
+.txt {
+    margin-left:1em;
+    width:10em;
 }

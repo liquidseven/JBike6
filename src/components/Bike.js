@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
@@ -11,12 +10,13 @@ import MenuItem from '@material-ui/core/MenuItem'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import './Component.css'
+import './Bike.css'
 
 class Bike extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { bikeName: "Schwinn Crown"}
+        this.state = { bikeName: "Schwinn Crown", angleMeasurement : 0}
         this.handleHeadAngle = this.handleHeadAngle.bind(this);
         this.handleAngleMeasurement = this.handleAngleMeasurement.bind(this);
         this.handleWheelBase = this.handleWheelBase.bind(this);
@@ -28,6 +28,8 @@ class Bike extends React.Component {
     }
 
     handleAngleMeasurement(e) {
+        console.log(e.target.value)
+        this.setState({angleMeasurement : e.target.value})
         this.props.action[1](e.target.value);
     }
 
@@ -44,41 +46,31 @@ class Bike extends React.Component {
     }
 
     render() {
-        return (<div>
-            <table>
-            <tbody>
-                <tr>
-                    <td>
-                        <FormControl>
-                            <InputLabel htmlFor="bikeName">{this.state.bikeName}</InputLabel>
-                                <Select autoWidth={true} id="bikeName" value={this.state.bikename}>
-                                    <MenuItem value={this.state.bikeName}>{this.state.bikeName}</MenuItem>
-                                </Select>
-                        </FormControl>
-                    </td>
-                    <td><Button variant="contained" color="primary">Flip Fork</Button></td>
-                </tr>
-            <tr>
-                <td><TextField id="name" label="Bike Name" name='name' margin='normal' onChange={this.handleBikeName}/></td>
-                <td><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></td>
-            </tr>
-            </tbody>
-            </table>
-            <table>
-            <tbody>
-                <tr><td><FormLabel>Angle Measurement</FormLabel></td></tr>
-                <tr><td><RadioGroup
-            value = {this.state.angleMeasurement}
-            onChange={this.handleAngleMeasurement}>
-                <FormControlLabel value="0" control={<Radio />} label="Degrees" />
-                <FormControlLabel value="1" control={<Radio />} label="Radians" />
+        return (<div id="bike">
+            <span id="drop">
+            <FormControl>
+            <InputLabel htmlFor="bikeName">Bike Name</InputLabel>
+            <Select autoWidth={true} id="bikeName" value={this.state.bikeName}>
+                <MenuItem value={this.state.bikeName}>{this.state.bikeName}</MenuItem>
+           </Select>
+             </FormControl>
+             </span>
+             <span id="flip"><Button variant="contained" color="primary">Flip Fork</Button></span>
+            <span id="name"><TextField id="name" label="Bike Name" name='name' margin='normal' onChange={this.handleBikeName}/></span>
+            <span id="headAngle"><TextField id="headAngle" label="Head angle" defaultValue = "0.0" name='headAngle' margin="normal" variant='outlined' onChange={this.handleHeadAngle}/></span>
+            
+                <span id="angle-measure">
+                <FormControl>
+            <FormLabel>Angle Measurement</FormLabel>
+            <RadioGroup value={this.state.angleMeasurement} onChange={this.handleAngleMeasurement}>
+                <FormControlLabel value='0' control={<Radio />} label="Degrees" />
+                <FormControlLabel value='1' control={<Radio />} label="Radians" />
             </RadioGroup>
-            </td></tr>
-            </tbody>
-            </table>
-            <TextField id="wheelBase" label="Wheel base" defaultValue = "0.0" name='wheelBase' margin="normal" variant='outlined' onChange={this.handleWheelBase}/>
-            <TextField id="trail" label="Trail" defaultValue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/>
-            <TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"/>
+            </FormControl>
+            </span>
+            <span id="wheelBase"><TextField id="wheelBase" label="Wheel base" defaultValue = "0.0" name='wheelBase' margin="normal" variant='outlined' onChange={this.handleWheelBase}/></span>
+            <span id="trail"><TextField id="trail" label="Trail" defaultValue = "0.0" margin = "normal" variant='outlined' onChange={this.handleTrail}/></span>
+            <span id="comment"><TextField id="bikeComment" label="Bike Comment" multiline rows="6" defaultValue="No Comment" margin="normal" variant="outlined"/></span>
         </div>)
     }
 }

@@ -1,0 +1,39 @@
+#bike {
+    display: grid;
+    grid-template-areas: "drop-down flip comment" "name wheel-base comment" "head-angle trail comment";
+}
+
+#drop {
+    grid-area: drop-down;
+}
+
+#flip {
+    grid-area: flip;
+}
+
+#name {
+    grid-area: name;
+}
+
+#headAngle {
+    display: grid;
+    grid-template-areas: angleMea;
+    grid-area: head-angle;
+}
+
+#angle-measure {
+    grid-area: head-angle;
+    margin-top: 5em;
+}
+
+#wheelBase {
+    grid-area: wheel-base;
+}
+
+#trail {
+    grid-area: trail;
+}
+
+#comment {
+    grid-area: comment;
+}

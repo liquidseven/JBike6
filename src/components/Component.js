@@ -326,140 +326,106 @@ class Component extends React.Component {
     render() {
         return (
         <div>
+            <div id="wheels">
             <h2>Components</h2>
-            
-            <table className="center">
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <th><FormLabel>Rear Wheel</FormLabel></th>
-                    <th><FormLabel>Front Wheel</FormLabel></th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <th><FormLabel>Diameter</FormLabel></th>
-                    <td><TextField id="rearWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelDiameter}/></td>
-                    <td><TextField id="frontWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelDiameter}/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <th><FormLabel>Mass</FormLabel></th>
-                    <td><TextField id="rearWheelMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelMass}/></td>
-                    <td><TextField id="frontWheelMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelMass}/></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>Moment of Inertia</FormLabel></th>
-                    <th><FormLabel>lxx & lyy</FormLabel></th>
-                    <td><TextField id="rearLxxLyy" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelLxxLyy}/></td>
-                    <td><TextField id="frontLxxLyy" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelLxxLyy}/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <th><FormLabel>lzz</FormLabel></th>
-                    <td><TextField id="rearLzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelLzz}/></td>
-                    <td><TextField id="frontLzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelLzz}/></td>
-                </tr>
-            </tbody>
-            </table>
+                    <FormLabel>Rear Wheel</FormLabel>
+                    <FormLabel>Front Wheel</FormLabel>
+                    <FormLabel>Diameter</FormLabel>
+                    <TextField id="rearWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelDiameter}/>
+                    <TextField id="frontWheelDiameter" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelDiameter}/>
+                    <FormLabel>Mass</FormLabel>
+                    <TextField id="rearWheelMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelMass}/>
+                    <TextField id="frontWheelMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelMass}/>
+                    <FormLabel>Moment of Inertia</FormLabel>
+                    <FormLabel>lxx {'&'} lyy</FormLabel>
+                    <TextField id="rearLxxLyy" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelLxxLyy}/>
+                    <TextField id="frontLxxLyy" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelLxxLyy}/>
+                    <FormLabel>lzz</FormLabel>
+                    <TextField id="rearLzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearWheelLzz}/>
+                    <TextField id="frontLzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontWheelLzz}/>
+            </div>
+                    <FormLabel>Rear Frame</FormLabel>
+                    <FormLabel>Rider</FormLabel>
+                    <FormLabel>Rear Rack</FormLabel>
 
-            <table className="center">
-            <tbody>
-                <tr>
-                    <th></th>
-                    <th><FormLabel>Rear Frame</FormLabel></th>
-                    <th><FormLabel>Rider</FormLabel></th>
-                    <th><FormLabel>Rear Rack</FormLabel></th>
-                </tr>
-                <tr>
-                    <th><FormLabel>X</FormLabel></th>
-                    <td><TextField id="frameX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameX}></TextField></td>
-                    <td><TextField id="riderX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderX}></TextField></td>
-                    <td><TextField id="rackX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackX}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>Y</FormLabel></th>
-                    <td><TextField id="frameY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameY}></TextField></td>
-                    <td><TextField id="riderY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderY}></TextField></td>
-                    <td><TextField id="rackY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackY}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>Mass</FormLabel></th>
-                    <td><TextField id="frameMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameMass}></TextField></td>
-                    <td><TextField id="riderMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderMass}></TextField></td>
-                    <td><TextField id="rackMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackMass}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>l11</FormLabel></th>
-                    <td><TextField id="framel11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameL11}></TextField></td>
-                    <td><TextField id="riderl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderL11}></TextField></td>
-                    <td><TextField id="rackl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackL11}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>l22</FormLabel></th>
-                    <td><TextField id="framel22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameL22}></TextField></td>
-                    <td><TextField id="riderl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderL22}></TextField></td>
-                    <td><TextField id="rackl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackL22}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>lzz</FormLabel></th>
-                    <td><TextField id="framelzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameLzz}></TextField></td>
-                    <td><TextField id="riderlzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderLzz}></TextField></td>
-                    <td><TextField id="racklzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackLzz}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>Principal Axis Angle (alpha)</FormLabel></th>
-                    <td><TextField id="frameAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameAlpha}></TextField></td>
-                    <td><TextField id="riderAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderAlpha}></TextField></td>
-                    <td><TextField id="rackAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackAlpha}></TextField></td>
-                </tr>
-            </tbody>
-            </table>
+                    <FormLabel>X</FormLabel>
+                    <TextField id="frameX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameX}></TextField>
+                    <TextField id="riderX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderX}></TextField>
+                    <TextField id="rackX" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackX}></TextField>
 
-            <table className="center">
-            <tbody>
-                <tr>
-                    <td><Button variant="contained" size="small" color="primary" onClick={this.handleXyUv}>{this.state.xyuv}</Button></td>
-                    <th><FormLabel>Front Fork</FormLabel></th>
-                    <th><FormLabel>Front Basket</FormLabel></th>
-                </tr>
-                <tr>
-                    <th><FormLabel>{this.state.X_U}</FormLabel></th>
-                    <td><TextField id="uFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkX}></TextField></td>
-                    <td><TextField id="uFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkX}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>{this.state.Y_V}</FormLabel></th>
-                    <td><TextField id="vFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkY}></TextField></td>
-                    <td><TextField id="vFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkY}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>Mass</FormLabel></th>
-                    <td><TextField id="massFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkMass}></TextField></td>
-                    <td><TextField id="massFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkMass}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>l11</FormLabel></th>
-                    <td><TextField id="frontForkl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkL11}></TextField></td>
-                    <td><TextField id="frontBasketl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkL11}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>l22</FormLabel></th>
-                    <td><TextField id="frontForkl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkL22}></TextField></td>
-                    <td><TextField id="frontBasketl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketL22}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>lzz</FormLabel></th>
-                    <td><TextField id="frontForklzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkLzz}></TextField></td>
-                    <td><TextField id="frontBasketlzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketLzz}></TextField></td>
-                </tr>
-                <tr>
-                    <th><FormLabel>alpha</FormLabel></th>
-                    <td><TextField id="frontForkAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkAlpha}></TextField></td>
-                    <td><TextField id="frontBasketAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketAlpha}></TextField></td>
-                </tr>
-                </tbody>
-            </table>
+                    <FormLabel>Y</FormLabel>
+                    <TextField id="frameY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameY}></TextField>
+                    <TextField id="riderY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderY}></TextField>
+                    <TextField id="rackY" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackY}></TextField>
+                
+                
+                    <FormLabel>Mass</FormLabel>
+                    <TextField id="frameMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameMass}></TextField>
+                    <TextField id="riderMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderMass}></TextField>
+                    <TextField id="rackMass" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackMass}></TextField>
+                
+                
+                    <FormLabel>l11</FormLabel>
+                    <TextField id="framel11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameL11}></TextField>
+                    <TextField id="riderl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderL11}></TextField>
+                    <TextField id="rackl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackL11}></TextField>
+                
+                
+                    <FormLabel>l22</FormLabel>
+                    <TextField id="framel22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameL22}></TextField>
+                    <TextField id="riderl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderL22}></TextField>
+                    <TextField id="rackl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackL22}></TextField>
+                
+                
+                    <FormLabel>lzz</FormLabel>
+                    <TextField id="framelzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameLzz}></TextField>
+                    <TextField id="riderlzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderLzz}></TextField>
+                    <TextField id="racklzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackLzz}></TextField>
+                
+                
+                    <FormLabel>Principal Axis Angle (alpha)</FormLabel>
+                    <TextField id="frameAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearFrameAlpha}></TextField>
+                    <TextField id="riderAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRiderAlpha}></TextField>
+                    <TextField id="rackAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleRearRackAlpha}></TextField>
+                
+                    <Button variant="contained" size="small" color="primary" onClick={this.handleXyUv}>{this.state.xyuv}</Button>
+                    <FormLabel>Front Fork</FormLabel>
+                    <FormLabel>Front Basket</FormLabel>
+                
+                
+                    <FormLabel>{this.state.X_U}</FormLabel>
+                    <TextField id="uFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkX}></TextField>
+                    <TextField id="uFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkX}></TextField>
+                
+                
+                    <FormLabel>{this.state.Y_V}</FormLabel>
+                    <TextField id="vFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkY}></TextField>
+                    <TextField id="vFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkY}></TextField>
+                
+                
+                    <FormLabel>Mass</FormLabel>
+                    <TextField id="massFrontFork" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkMass}></TextField>
+                    <TextField id="massFrontBasket" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkMass}></TextField>
+                
+                
+                    <FormLabel>l11</FormLabel>
+                    <TextField id="frontForkl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkL11}></TextField>
+                    <TextField id="frontBasketl11" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketkL11}></TextField>
+                
+                
+                    <FormLabel>l22</FormLabel>
+                    <TextField id="frontForkl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkL22}></TextField>
+                    <TextField id="frontBasketl22" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketL22}></TextField>
+                
+                
+                    <FormLabel>lzz</FormLabel>
+                    <TextField id="frontForklzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkLzz}></TextField>
+                    <TextField id="frontBasketlzz" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketLzz}></TextField>
+                
+                
+                    <FormLabel>alpha</FormLabel>
+                    <TextField id="frontForkAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontForkAlpha}></TextField>
+                    <TextField id="frontBasketAlpha" defaultValue="0.0" margin="normal" variant="outlined" onChange={this.handleFrontBasketAlpha}></TextField>
         </div>
         )
     }
