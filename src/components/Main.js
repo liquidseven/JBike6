@@ -1,5 +1,5 @@
 import React from 'react';
-import Bike from './Bike';
+import Bike from './Bike.test';
 import Component from './Component'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -745,16 +745,6 @@ class Main extends React.Component {
     }
 
     roots(coeficients) {
-        let N = coeficients.length - 1 
-        let c = math.zeros(N,N)
-        let a = coeficients[N]
-
-        for (let i = 0; i < N; i++) {
-            c.set([i,N-1], -coeficients[i]/a)
-        }
-        for (let i = 1; i < N; i++) {
-            c.set([i,i-1], 1)
-        }
     }
 
     polyInt(p) {

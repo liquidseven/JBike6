@@ -9,6 +9,7 @@ import Video from './Video'
 import ProgramHelp from './ProgramHelp'
 import Credit from './Credit'
 import ProgramMath from './ProgramMath'
+import Main2 from './Main2'
 
 
 
@@ -27,8 +28,8 @@ class App extends Component {
         <PersistentDrawerLeft />
         <CssBaseline />
         <Switch>
-        <Route exact path="/" component={Main} />
-        <Route path="/program" component={Main} />
+        <Route exact path="/" component={Main2} />
+        <Route path="/program" component={Main2} />
         <Route path="/eigenvalues" component={Eigenvalues}/>
         <Route path="/Video" component={Video} />
         <Route path="/Math" component={ProgramMath} />
