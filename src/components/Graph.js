@@ -92,7 +92,7 @@ class Graph extends Component {
     render() {
         return(
             <div>
-                <Scatter data={this.d} options={this.options.options} width={600} height={250}/>
+                <Scatter data={this.d} options={this.options.options} width={250} height={100}/>
             </div>
         )
     }

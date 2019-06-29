@@ -1,7 +1,9 @@
 .App {
-  text-align: center;
+  margin-top: 10em;
+  background-color:grey;
+  display:grid;
+  grid-template-areas: "bike forward" "component component" "graph graph";
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;

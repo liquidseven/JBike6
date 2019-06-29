@@ -1,0 +1,22 @@
+.NavMenu {
+    display:flex;
+    justify-content: center;
+}
+
+.linkBtn {
+    border: none;
+    width:7em;
+    height:3em;
+    text-align:center;
+    background-color:blue;
+    color:lightblue;
+    transition-duration: 0.4s;
+    text-decoration:none;
+    font-size:1.2em;
+    margin-left:1em;
+}
+
+.linkBtn:hover {
+    background-color:white;
+    color:darkblue;
+}

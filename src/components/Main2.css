@@ -1,0 +1,9 @@
+.main2 {
+    display:grid;
+    grid-template-areas: "bike forward" "component component" "graph graph";
+}
+
+.bike {
+    grid-area: bike;
+    grid-template-areas: "drop-down flip comment" "name wheel-base comment" "head-angle trail comment";
+}
